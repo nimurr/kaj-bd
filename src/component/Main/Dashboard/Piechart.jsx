@@ -1,105 +1,98 @@
-import { PieChart, Pie, Cell } from 'recharts';
-import { Select } from 'antd';
-import { useState } from 'react';
-import { useGetDashboardStatusQuery } from '../../../redux/features/dashboard/dashboardApi';
-
-const sampleData = {
-  august: { totalUsers: 15457, totalEmployees: 9457, month: 'August' },
-  september: { totalUsers: 10457, totalEmployees: 11457, month: 'September' },
-};
-
 const Piechart = () => {
-
-  const { data: userData, isLoading } = useGetDashboardStatusQuery();
-
-
-
-  const mainData = userData?.usersDataInDifferentTimes[0];
-
-
-  const [month, setMonth] = useState('august');
-  const userRatio = sampleData[month]; // Using sample data here
-
-  const data = [
-    { name: 'Total Users', value: mainData?.users },
-    { name: 'Total Employees', value: mainData?.collaborators },
+  const metrics = [
+    { label: 'Resent-Used', value: '36k' },
+    { label: 'Total Users', value: '36k' },
+    { label: 'Total Income', value: '100k' },
   ];
 
-  const COLORS = ['#002831', '#92b8c0',];
-
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
-  const handleChange = (value) => {
-    setMonth(value);
-  };
+  // SVG circle properties - matching the exact visual from the image
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
 
   return (
-    <div className='w-full col-span-full md:col-span-2 bg-white rounded-lg  border border-[#92b8c0]'>
-      <div className='flex justify-between items-center  border-b border-gray-300 py-3'>
-        <div className='pl-3'>
-          <h1 className='font-medium text-6'>User Ratio  {mainData?.month}</h1>
-        </div>
-        <div className='pr-3'>
-          <Select
-            defaultValue={month} className='border-none'
-            style={{ width: 100 }}
-            onChange={handleChange}
-            options={[
-              { value: 'august', label: 'August' },
-              { value: 'september', label: 'September' },
-            ]}
-          />
-        </div>
-      </div>
-      <div className='flex justify-around items-center gap-3 mt-3 '>
-        <div className='text-white'>
-          <PieChart width={200} height={200}>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill=""
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell className='text-white' key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </div>
-        <div>
-          <div >
-            <div className='flex items-center'>
-              <div className='bg-[#002831] w-3 h-3 mr-1'></div>
-              <p className='text-[10px] font-normal'>Total Users for {mainData?.month}</p>
+    <div className="col-span-full md:col-span-2 border-2 border-[#344f47] rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.2)]">
+      <div className="bg-white rounded-3xl p-8 ">
+        {/* Metrics Section */}
+        <div className="space-y-5 mb-10">
+          {metrics.map((metric, index) => (
+            <div key={index} className="flex items-start">
+              {/* dinamic color Dot */}
+              {
+                index === 0 ? (
+                  <div className="w-2 h-2 bg-[#f1f5f9] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                ) : null
+              }
+              {
+                index === 1 ? (
+                  <div className="w-2 h-2 bg-[#778beb] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                ) : null
+              }
+              {
+                index === 2 ? (
+                  <div className="w-2 h-2 bg-[#778beb60] rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                ) : null
+              }
+
+              <div>
+                <div className="text-sm text-gray-500 mb-1">{metric.label}</div>
+                <div className="text-3xl font-bold text-gray-900">{metric.value}</div>
+              </div>
             </div>
-            <h1 className='text-[18px] font-semibold'>{mainData?.users}k</h1>
+          ))}
+        </div>
+
+        {/* P&L Section */}
+        <div className="flex items-center">
+          {/* Circular Progress Chart with Two Segments */}
+          <div className="relative mr-6">
+            <svg width="100" height="100" className="transform -rotate-90">
+              {/* Background circle */}
+              <circle
+                cx="50"
+                cy="50"
+                r={radius}
+                stroke="#f1f5f9"
+                strokeWidth="8"
+                fill="transparent"
+              />
+              {/* First progress segment (lighter orange) */}
+              <circle
+                cx="50"
+                cy="50"
+                r={radius}
+                stroke="#778beb"
+                strokeWidth="8"
+                fill="transparent"
+                strokeDasharray={`${circumference * 0.35} ${circumference}`}
+                strokeDashoffset={0}
+                strokeLinecap="round"
+                className="transition-all duration-500 ease-out"
+              />
+              {/* Second progress segment (darker orange) - connected */}
+              <circle
+                cx="50"
+                cy="50"
+                r={radius}
+                stroke="#778beb60"
+                strokeWidth="8"
+                fill="transparent"
+                strokeDasharray={`${circumference * 0.30} ${circumference}`}
+                strokeDashoffset={-circumference * 0.35}
+                strokeLinecap="round"
+                className="transition-all duration-500 ease-out"
+              />
+            </svg>
           </div>
-          <div className='mt-[23px]'>
-            <div className='flex items-center'>
-              <div className='bg-[#C8D7DE] w-3 h-3  mr-1'></div>
-              <p className='text-[10px] font-normal'>Total Employees for {mainData?.month}</p>
-            </div>
-            <h1 className='text-[18px] font-semibold'>{mainData?.collaborators}k</h1>
+
+          {/* P&L Text */}
+          <div>
+            <h3 className="text-xl font-bold text-gray-900 mb-1">U&D</h3>
+            <p className="text-xs text-gray-500">Users and Drivers ratio</p>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default Piechart;
+export default Piechart
