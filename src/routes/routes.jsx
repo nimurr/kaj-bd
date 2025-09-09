@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       // <AdminRoutes>
       // </AdminRoutes>
       // <PrivetRout1e>  
-        <MainLayout />
+      <MainLayout />
       // </PrivetRout1e>
     ),
     errorElement: <h1>Error</h1>,

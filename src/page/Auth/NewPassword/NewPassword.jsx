@@ -7,6 +7,8 @@ import CustomInput from "../../../utils/CustomInput";
 import CustomButton from "../../../utils/CustomButton";
 import { toast } from "sonner";
 import { useResetPasswordMutation } from "../../../redux/features/auth/authApi";
+import logoimage from '/public/logo/Logo-Orange.png';
+
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -56,16 +58,11 @@ const NewPassword = () => {
             className="w-[147px] h-[152px] mx-auto md:my-20 md:mx-5"
             alt="Sign in illustration"
       /> */}
-      <div className="w-full max-w-7xl mx-auto border-shadow rounded-md h-[70%] md:my-28 grid grid-cols-1 md:grid-cols-2 place-content-center px-5 py-10 gap-8 bg-white md:mx-10">
-        <div>
-          <img
-            src={changePasswordImage}
-            className="w-full h-full mx-auto"
-            alt="Change Password Illustration"
-          />
-        </div>
-        <div className="mt-16">
+      <div className="w-full md:w-[600px] mx-auto border-shadow rounded-md h-[60%] md:my-28 place-content-center px-5 py-10 gap-8 bg-white md:mx-10">
+
+        <div className="">
           <div className="mb-5">
+            <img src={logoimage} className="w-[100px] rounded-full shadow-xl h-[100px] mx-auto mb-5" alt="" />
             <h1 className="font-semibold text-xl flex items-center gap-2">
               <Link to="/auth/login">
                 <IoIosArrowBack />
@@ -121,7 +118,7 @@ const NewPassword = () => {
 
             {/* CustomButton for submission */}
             <Form.Item>
-              <button className="w-full bg-[#84df91] text-xl font-semibold text-white rounded-md py-2" loading={isLoading} border >
+              <button className="w-full bg-[#778beb] text-xl font-semibold text-white rounded-md py-2" loading={isLoading} border >
                 Update Password
               </button>
             </Form.Item>

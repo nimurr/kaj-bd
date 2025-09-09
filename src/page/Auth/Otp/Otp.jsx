@@ -10,6 +10,8 @@ import {
   useVerifyEmailMutation,
 } from "../../../redux/features/auth/authApi";
 import { toast } from "sonner";
+import logoimage from '/public/logo/Logo-Orange.png';
+
 
 const Otp = () => {
   const [otp, setOtp] = useState("");
@@ -60,12 +62,11 @@ const Otp = () => {
           className="w-[147px] h-[152px] mx-auto md:my-20 md:mx-5"
           alt="Sign in illustration"
     /> */}
-      <div className="w-full max-w-7xl mx-auto border-shadow rounded-md h-[70%] md:my-28 grid grid-cols-1 md:grid-cols-2 place-content-center px-5 py-15 gap-8 bg-white md:mx-10 ">
-        <div>
-          <img src={otpImage} className="w-3/4 h-[461px] mx-auto" alt="" />
-        </div>
-        <div className="mt-16 md:mt-32">
+      <div className="w-full md:w-[600px] mx-auto border-shadow rounded-md h-[60%] md:my-28 place-content-center px-5 py-15 gap-8 bg-white md:mx-10 ">
+
+        <div className="">
           <div className="mb-5 space-y-5">
+             <img src={logoimage} className="w-[100px] rounded-full shadow-xl h-[100px] mx-auto mb-5" alt="" />
             <h1 className="font-semibold text-xl flex items-center gap-2">
               <Link to="/auth/login">
                 <IoIosArrowBack />
@@ -93,13 +94,13 @@ const Otp = () => {
             }}
           />
           <div onClick={handleMatchOtp} className="mt-5">
-            <button className="w-full bg-[#84df91] text-xl font-semibold text-white rounded-md py-2" loading={isLoading} border >
+            <button className="w-full bg-[#778beb] text-xl font-semibold text-white rounded-md py-2" loading={isLoading} border >
               Verify
             </button>
           </div>
           <div className="flex justify-between items-center my-4">
             <h1>Didn’t receive code?</h1>
-            <button onClick={handleResendPassword} className="text-[#4c7e95]">
+            <button onClick={handleResendPassword} className="text-[#778beb]">
               Verify Code
             </button>
           </div>

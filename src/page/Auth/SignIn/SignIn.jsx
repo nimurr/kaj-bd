@@ -50,22 +50,10 @@ const SignIn = () => {
 
   return (
     <div className="w-full  h-full md:h-screen md:flex justify-around overflow-visible">
-      {/* <img
-            src={authLogo}
-            className="w-[147px] h-[144px] mx-auto md:my-20 md:mx-5"
-            alt="Sign in illustration"
-      /> */}
-      <div className="w-full max-w-7xl mx-auto border-shadow rounded-md h-[70%] md:my-28 grid grid-cols-1 md:grid-cols-2 place-content-center px-5 py-10 gap-8 bg-white md:mx-10">
-        <div className="hidden md:flex justify-center">
-          <img
-            src={signinImage}
-            className="w-full h-full mx-auto"
-            alt="Sign in illustration"
-          />
-        </div>
-        <div className="mt-16 px-8">
+      <div className="md:w-[600px] mx-auto border-shadow rounded-md h-[70%] md:my-28 place-content-center px-5 py-5 gap-8 bg-white md:mx-10">
+        <div className=" px-8">
           <div className="mb-8">
-            <img src={logoimage} className="w-[200px] mb-5" alt="" />
+            <img src={logoimage} className="w-[100px] rounded-full shadow-xl h-[100px] mx-auto mb-5" alt="" />
             <h1 className="font-semibold text-3xl text-gray-800">
               Hello, Welcome!
             </h1>
@@ -130,7 +118,7 @@ const SignIn = () => {
             </div>
 
             <Form.Item>
-              <button loading={isLoading} className="w-full bg-[#84df91] text-xl font-semibold text-white  rounded-md py-2" border={true}>
+              <button loading={isLoading} className="w-full bg-[#778beb] text-xl font-semibold text-white  rounded-md py-2" border={true}>
                 Login
               </button>
             </Form.Item>
