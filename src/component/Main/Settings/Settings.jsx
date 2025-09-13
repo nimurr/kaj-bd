@@ -110,7 +110,7 @@ const Settings = () => {
       {settingsItem.map((setting, index) => (
         <div
           key={index}
-          className="w-full p-4 mb-2 text-sm rounded-lg bg-[#e6eff0] hover:bg-transparent hover:border-[#038c6d] border flex items-center justify-between cursor-pointer "
+          className="w-full p-4 mb-2 text-sm rounded-lg bg-[#778aeb2d] hover:bg-transparent hover:border-[#778aeb9f] border flex items-center justify-between cursor-pointer "
           onClick={() => handleNavigate(setting.path)}
         >
           <h2 className="text-xl">{setting.title}</h2>
