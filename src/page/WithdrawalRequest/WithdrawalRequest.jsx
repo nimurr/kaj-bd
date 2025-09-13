@@ -112,6 +112,7 @@ const WithdrawalRequest = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
+            render: (s) => <span className={`${s == "Pending" ? "text-yellow-500" : "text-green-600"} `}>{s}</span>
         },
         {
             title: 'Action',
@@ -120,10 +121,9 @@ const WithdrawalRequest = () => {
                 <div>
                     <Button
                         type="link"
-                        icon={<EyeOutlined />}
+                        icon={<EyeOutlined className='text-2xl' />}
                         onClick={() => handleShowDetails(record)} // Correct function call
                     >
-                        Show Details
                     </Button>
                 </div>
             ),

@@ -47,10 +47,7 @@ const Settings = () => {
       title: "About us",
       path: "about-us",
     },
-    {
-      title: "FAQ",
-      path: "all-faq",
-    },
+   
   ];
 
   const handleNavigate = (value) => {

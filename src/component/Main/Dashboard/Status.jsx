@@ -25,7 +25,7 @@ const Status = () => {
         </div>
         <div className="space-y-2">
           <h1 className="text-center text-4xl font-semibold text-[#222222]">
-            ${data?.totalAmountOfEarnings?.amount || "0"}
+            {data?.totalAmountOfEarnings?.amount || "0"}
           </h1>
           <h1>Total Provider</h1>
         </div>
@@ -47,7 +47,7 @@ const Status = () => {
         </div>
         <div className="space-y-2">
           <h1 className="text-center text-4xl font-semibold text-[#222222]">
-            ${data?.totalAmountOfEarnings?.amount || "0"}
+            {data?.totalAmountOfEarnings?.amount || "0"}
           </h1>
           <h1>New Provider  </h1>
         </div>
