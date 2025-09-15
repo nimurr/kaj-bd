@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa"; // Importing the back arrow icon
+import { IoMdTime } from "react-icons/io";
 
 const WorkTrakercompleted = () => {
 
@@ -12,10 +13,32 @@ const WorkTrakercompleted = () => {
     }
 
     return (
-        <section>
-            <div>
-                <div onClick={handleShowDetails}>
-                    <img src="https://thumbs.dreamstime.com/b/close-up-portrait-young-indian-man-standing-outside-his-forehead-looking-seriously-camera-301326364.jpg" alt="User" />
+        <section className="p-5 ">
+            <div className="border border-gray-200 p-5 rounded-lg">
+                <div className="flex border border-gray-200 p-2 rounded-lg items-center justify-between gap-5 mb-5 ">
+                    <h2 className="text-3xl font-semibold">Work Traker</h2>
+                    <span className="text-green-400 bg-green-100 py-1 px-3 rounded-lg">Completed</span>
+                </div>
+
+                <h2 className=" border border-purple-300 p-2 rounded-lg text-xl bg-[#ddb3ff] font-semibold capitalize mb-5">Proof of work complete information  </h2>
+                <h2 className=" border border-purple-300 p-2 rounded-lg text-xl bg-[#ddb3ff] font-semibold capitalize mb-5">Services Booking Information </h2>
+
+                <div>
+                    <div>
+                        <h2 className="text-xl font-semibold">Booking Order Date & time</h2>
+                        <span className="flex items-center gap-3"><IoMdTime className="!text-purple-400" /> Jun 17, 2025  09:31AM </span>
+                    </div>
+                </div>
+
+
+
+
+                <div className="flex items-center gap-5 my-5" >
+                    <img className="w-20 cursor-pointer rounded-full h-20" onClick={handleShowDetails} src="https://thumbs.dreamstime.com/b/close-up-portrait-young-indian-man-standing-outside-his-forehead-looking-seriously-camera-301326364.jpg" alt="User" />
+                    <div>
+                        <h2 className="text-2xl font-semibold">Bashar islam  </h2>
+                        <p>User</p>
+                    </div>
                 </div>
             </div>
 
