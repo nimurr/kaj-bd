@@ -206,7 +206,7 @@ const Settings = () => {
                 </button>
               </p> */}
               <Form.Item className="w-full">
-                <button className="w-full bg-[#038c6d] text-white p-3 text-xl font-semibold rounded-md">Update Password</button>
+                <button className="w-full bg-[#778beb] text-white p-3 text-xl font-semibold rounded-md">Update Password</button>
               </Form.Item>
             </Form>
           </div>
@@ -235,7 +235,7 @@ const Settings = () => {
                 </Form.Item>
               </div>
               <Form.Item>
-                <button className="w-full bg-[#038c6d] text-white p-3 text-xl font-semibold rounded-md">Send verification code</button>
+                <button className="w-full bg-[#778beb] text-white p-3 text-xl font-semibold rounded-md">Send verification code</button>
               </Form.Item>
             </Form>
           </div>
@@ -266,7 +266,7 @@ const Settings = () => {
                   <button className="font-medium text-">Resend</button>
                 </p>
               </div>
-              <button className="w-full bg-[#038c6d] text-white p-3 text-xl font-semibold rounded-md">Verify </button>
+              <button className="w-full bg-[#778beb] text-white p-3 text-xl font-semibold rounded-md">Verify </button>
             </form>
           </div>
         )}
@@ -319,7 +319,7 @@ const Settings = () => {
                 <CustomInput placeholder="Confirm Password" isPassword />
               </Form.Item>
               <Form.Item>
-                <button className="w-full bg-[#038c6d] text-white p-3 text-xl font-semibold rounded-md">Update password</button>
+                <button className="w-full bg-[#778beb] text-white p-3 text-xl font-semibold rounded-md">Update password</button>
               </Form.Item>
             </Form>
           </div>
