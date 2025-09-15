@@ -4,6 +4,19 @@ import { IoChevronBack } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 const ContactUs = () => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const number = e.target.number.value;
+        const email = e.target.email.value;
+        const formData = {
+            number,
+            email
+        }
+        console.log(formData);
+    }
+
+
     return (
         <div>
             <div className="flex justify-between items-center py-5">
@@ -26,7 +39,7 @@ const ContactUs = () => {
                         <h2>+88 01708784404</h2>
                     </div>
                 </div>
-                <div className='bg-gray-100 p-5 rounded-lg'>
+                <form onSubmit={handleSubmit} className='bg-gray-100 p-5 rounded-lg'>
                     <div>
                         <span className='font-semibold text-xl mb-2 block'>Eamil</span>
                         <input className='p-2 rounded-lg w-full ' placeholder='Enter Your Contact Email' type="text" name="email" id="" />
@@ -38,7 +51,7 @@ const ContactUs = () => {
                     <div className='mt-5'>
                         <button className='py-2 px-8 rounded-lg bg-[#778beb] text-white'>Update</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
