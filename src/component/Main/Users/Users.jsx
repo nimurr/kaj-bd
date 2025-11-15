@@ -142,7 +142,7 @@ const Users = () => {
             responsive={true}
             columns={columns}
             dataSource={dataSource}
-            rowKey="id" 
+            rowKey="id"
           />
         </ConfigProvider>
 
