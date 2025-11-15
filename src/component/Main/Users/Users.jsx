@@ -83,7 +83,7 @@ const Users = () => {
     { title: "Full Name", dataIndex: "name", key: "name" },
     { title: "Email", dataIndex: "email", key: "email" },
     { title: "Phone Number", dataIndex: "phoneNumber", key: "phoneNumber" },
-    { title: "status", dataIndex: "status", key: "status", render: (s) => <span className={`${s == "Active" && "bg-green-500 p-2 rounded-lg text-white"}`}>{s}</span> },
+    { title: "Gender", dataIndex: "gender", key: "gender" },
     {
       title: "Joined Date",
       dataIndex: "createdAt",
