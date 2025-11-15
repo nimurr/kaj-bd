@@ -8,7 +8,7 @@ export const baseApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       // Retrieve the token from your store or local storage
       const token = localStorage.getItem("token");
-      console.log(token)
+      // console.log(token)
       // const token = getState().auth.token;
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
