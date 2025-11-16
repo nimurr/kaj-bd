@@ -7,8 +7,14 @@ const providersApi = baseApi.injectEndpoints({
                 url: `/users/paginate/for-provider?name=${searchData}&providerApprovalStatus=accept&from=${from}&to=${to}`,
                 method: "GET",
             }),
-        })
+        }),
+        getAllNewProvidersList: builder.query({
+            query: () => ({
+                url: `/users/paginate/for-provider?providerApprovalStatus=reject`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
-export const { useGetAllProvidersQuery } = providersApi;
+export const { useGetAllProvidersQuery , useGetAllNewProvidersListQuery } = providersApi;

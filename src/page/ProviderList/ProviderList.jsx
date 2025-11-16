@@ -10,7 +10,7 @@ import { useGetAllProvidersQuery } from "../../redux/features/providers/provider
 
 const { Item } = Form;
 
-const Users = () => {
+const ProviderList = () => {
     const [fromDate, setFromDate] = useState('2024-01-01');
     const [toDate, setToDate] = useState('2222-12-31');
     const [searchData, setSearchData] = useState('');
@@ -210,4 +210,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default ProviderList;
