@@ -157,13 +157,19 @@ const ProviderListNewProviderRequest = () => {
                         </div>
                         {/* Provider Profile Section */}
                         <div className="flex items-center justify-between gap-5 mb-5">
-                            <div className="flex items-center gap-5">
-                                <img
-                                    className="w-24 h-24 rounded-full"
-                                    src={userDataFull?.profileImage?.imageUrl.includes('amazonaws') ? userDataFull?.profileImage?.imageUrl : Url + userDataFull?.profileImage?.imageUrl}
-                                    alt="Provider"
-                                />
-                                <h1 className="text-2xl font-semibold">{userDataFull?.name}</h1>
+                            <div className="flex items-center justify-between gap-5 flex-wrap w-full">
+                                <div className="flex items-center  gap-5">
+                                    <img
+                                        className="w-24 h-24 rounded-full"
+                                        src={userDataFull?.profileImage?.imageUrl.includes('amazonaws') ? userDataFull?.profileImage?.imageUrl : Url + userDataFull?.profileImage?.imageUrl}
+                                        alt="Provider"
+                                    />
+                                    <h1 className="text-2xl font-semibold capitalize">{userDataFull?.name}</h1>
+                                </div>
+                                <div className="flex items-center gap-2 ">
+                                    <button className="py-2 px-8 rounded-lg bg-[#778beb] text-white">Accept </button>
+                                    <button className="py-2 px-8 rounded-lg bg-[#e03939] text-white">Reject </button>
+                                </div>
                             </div>
                         </div>
                         {/* Provider Details Section */}
@@ -193,12 +199,21 @@ const ProviderListNewProviderRequest = () => {
                                 <span>{userDataFull?.gender}</span>
                             </div>
                             <div className='my-5'>
-                                <h2 className="text-2xl font-semibold mb-3" >FrontSide Certificate Image</h2>
+                                <h2 className="text-2xl font-semibold my-3" >FrontSide Certificate Image</h2>
                                 <img className="w-full" src={userDataFull?.frontSideCertificateImage[0].includes('amazonaws') ? userDataFull?.frontSideCertificateImage[0] : Url + userDataFull?.frontSideCertificateImage[0]} alt="" />
                             </div>
                             <div className=''>
-                                <h2 className="text-2xl font-semibold mb-3" >BackSide Certificate Image</h2>
+                                <h2 className="text-2xl font-semibold my-3" >BackSide Certificate Image</h2>
                                 <img className="w-full" src={userDataFull?.backSideCertificateImage[0].includes('amazonaws') ? userDataFull?.backSideCertificateImage[0] : Url + userDataFull?.backSideCertificateImage[0]} alt="" />
+                            </div>
+                            <div className=''>
+                                <h2 className="text-2xl font-semibold my-3" >FaceImage From Front Cam</h2>
+                                {
+                                    userDataFull?.faceImageFromFrontCam[0] ?  
+                                    <img className="w-full" src={userDataFull?.faceImageFromFrontCam[0]?.includes('amazonaws') ? userDataFull?.faceImageFromFrontCam[0] : Url + userDataFull?.faceImageFromFrontCam[0]} alt="" />
+                                    :
+                                    "--"
+                                }
                             </div>
 
                         </div>

@@ -17,7 +17,7 @@ const ProviderList = () => {
 
     const { data, isLoading } = useGetAllProvidersQuery({ from: fromDate, to: toDate, searchData });
     const fullUserData = data?.data?.attributes?.results;
-    console.log(fullUserData)
+    // console.log(fullUserData)
 
     const [searchText, setSearchText] = useState("");
     const [selectedDate, setSelectedDate] = useState([null, null]);  // Store fromDate and toDate

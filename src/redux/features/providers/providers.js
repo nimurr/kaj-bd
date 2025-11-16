@@ -10,7 +10,7 @@ const providersApi = baseApi.injectEndpoints({
         }),
         getAllNewProvidersList: builder.query({
             query: () => ({
-                url: `/users/paginate/for-provider?providerApprovalStatus=reject`,
+                url: `/users/paginate/for-provider?providerApprovalStatus=pending`,
                 method: "GET",
             }),
         }),
