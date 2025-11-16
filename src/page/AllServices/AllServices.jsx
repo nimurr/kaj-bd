@@ -99,7 +99,7 @@ const AllServices = () => {
         }
 
         try {
-            const response = await updateService({ id : currentService._ServiceCategoryId, formData: formData}); // Call API to update service
+            const response = await updateService({ id: currentService._ServiceCategoryId, formData: formData }); // Call API to update service
             if (response?.data) {
                 closeEditModal();
                 refetch();
@@ -144,7 +144,7 @@ const AllServices = () => {
                             <div className="bg-[#778aeb5e] rounded-full w-24 h-24 flex items-center justify-center">
                                 <img className="w-20 h-20 rounded-full" src={service?.attachments[0]?.attachment?.includes('amazonaws') ? service?.attachments[0]?.attachment : (Url + service?.attachments[0]?.attachment)} alt="" />
                             </div>
-                            <span className={`${service?.isVisible ? 'text-green-500' : 'text-red-500'}`}>{service?.isVisible ? 'Active' : 'Inactive'}</span>
+                            <span className={`${service?.isVisible ? 'text-green-500 bg-green-100 py-1 px-3 rounded-lg' : 'text-red-500 bg-red-100 py-1 px-3 rounded-lg'} `}>{service?.isVisible ? 'Active' : 'Inactive'}</span>
                         </div>
                         <span className="text-2xl font-semibold block my-5 border-b border-dashed">{service?.name?.en}</span>
                         <div className="flex gap-4">
