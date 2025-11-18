@@ -15,7 +15,11 @@ const WorkTraker = () => {
     const [selectedMonthly, setSelectedMonthly] = useState('');
     const [dataSource, setDataSource] = useState([]);
 
-    const { data } = useGetAllWorkTrakerQuery({ from: fromDate, to: toDate });
+    const { data } = useGetAllWorkTrakerQuery({ from: fromDate, to: toDate , status: selectedStatus });
+    const fullData = data?.data?.attributes?.results;
+
+    console.log(fullData)
+
     const navigate = useNavigate(); // Initialize navigate for dynamic routing
 
     // Columns definition for the table
@@ -24,7 +28,7 @@ const WorkTraker = () => {
             title: 'No',
             dataIndex: 'no',
             key: 'no',
-            render: (text) => <span>{text}</span>,
+            render: (text , record , index) => <span>{index + 1}</span>,
         },
         {
             title: 'Username',
@@ -59,19 +63,19 @@ const WorkTraker = () => {
             render: (text) => {
                 let color = '';
                 switch (text) {
-                    case 'In Progress':
+                    case 'pending':
                         color = 'yellow';
                         break;
                     case 'Cancelled':
                         color = 'red';
                         break;
-                    case 'Completed':
+                    case 'completed':
                         color = 'green';
                         break;
                     default:
                         color = 'black';
                 }
-                return <span className={`${color === 'yellow' && 'text-orange-400 bg-orange-100 py-1 px-3 rounded-lg'} ${color === 'red' && 'text-red-400 bg-red-100 py-1 px-3 rounded-lg'} ${color === 'green' && 'text-green-400 bg-green-100 py-1 px-3 rounded-lg'}`}>{text}</span>;
+                return <span className={`${color === 'yellow' && 'text-orange-500 bg-orange-100 py-1 px-3 rounded-lg'} ${color === 'red' && 'text-red-500 bg-red-100 py-1 px-3 rounded-lg'} ${color === 'green' && 'text-green-500 bg-green-100 py-1 px-3 rounded-lg'}`}>{text}</span>;
             },
         },
     ];
@@ -80,7 +84,7 @@ const WorkTraker = () => {
     useEffect(() => {
         if (!data) return;
 
-        let filteredData = data;
+        let filteredData = fullData;
 
         // Apply date filter
         if (fromDate && toDate) {
@@ -139,7 +143,7 @@ const WorkTraker = () => {
                         placeholder="Select Status"
                     >
                         <Option value="">Work Status</Option>
-                        <Option value="Completed">Completed</Option>
+                        <Option value="completed">Completed</Option>
                         <Option value="Cancelled">Cancelled</Option>
                         <Option value="In Progress">In Progress</Option>
                     </Select>
