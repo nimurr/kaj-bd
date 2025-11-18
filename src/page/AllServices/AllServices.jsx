@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Input, message, Pagination } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { useCreateServiceMutation, useEditServiceMutation, useGetAllServicesQuery } from '../../redux/features/allServices/allServices';
+import { useCreateServiceMutation, useDeleteServiceMutation, useEditServiceMutation, useGetAllServicesQuery } from '../../redux/features/allServices/allServices';
 import Url from '../../redux/baseApi/forImageUrl';
 
 const AllServices = () => {
@@ -110,13 +110,18 @@ const AllServices = () => {
         }
     };
 
+    const [deleteService] = useDeleteServiceMutation();
     // Handle Delete Service
     const handleDeleteService = async (id) => {
         try {
             const response = await deleteService(id); // Call API to delete service
+            console.log(response)
             if (response?.data) {
-                setServices(services.filter(service => service._ServiceCategoryId !== id));
+                refetch();
                 message.success('Service deleted successfully!');
+            }
+            if (response?.error) {
+                message.error(response.error.data.message);
             }
         } catch (error) {
             message.error('Failed to delete service.');

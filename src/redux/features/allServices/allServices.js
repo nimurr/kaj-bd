@@ -4,7 +4,7 @@ const providersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllServices: builder.query({
             query: ({ page, limit }) => ({
-                url: `/service-categories/paginate?page=${page}&limit=${limit}`,
+                url: `/service-categories/paginate?page=${page}&limit=${limit}&isDeleted=false`,
                 method: "GET",
             }),
             providesTags: ["Services"],
@@ -19,8 +19,8 @@ const providersApi = baseApi.injectEndpoints({
         }),
         deleteService: builder.mutation({
             query: (id) => ({
-                url: `/service-categories/${id}`,
-                method: "DELETE",
+                url: `/service-categories/softDelete/${id}`,
+                method: "PUT",
             }),
             invalidatesTags: ["Services"],
         }),
