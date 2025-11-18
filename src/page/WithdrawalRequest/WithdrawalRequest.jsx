@@ -96,7 +96,7 @@ const WithdrawalRequest = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
-            render: (s) => <span className={`capitalize ${s === "Pending" ? "text-yellow-500" : "text-green-600"}`}>{s}</span>
+            render: (s) => <span className={`capitalize ${s === "rejected" ? "text-yellow-500" : "text-green-600"}`}>{s}</span>
         },
         {
             title: 'Action',
