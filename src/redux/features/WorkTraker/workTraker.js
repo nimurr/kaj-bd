@@ -8,7 +8,13 @@ const workTrakerApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
         }),
+        getFullCompletedWorkTraker: builder.query({
+            query: (id) => ({
+                url: `/service-bookings/with-costs-summary/for-admin/${id}`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
-export const { useGetAllWorkTrakerQuery } = workTrakerApi;
+export const { useGetAllWorkTrakerQuery , useGetFullCompletedWorkTrakerQuery } = workTrakerApi;

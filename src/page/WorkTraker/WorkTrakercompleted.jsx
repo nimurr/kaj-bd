@@ -2,7 +2,11 @@ import { useState } from "react";
 import { FaArrowLeft, FaStar } from "react-icons/fa";
 import { IoLocationSharp, IoTime } from "react-icons/io5";
 import { SiCcleaner } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useGetFullCompletedWorkTrakerQuery } from "../../redux/features/WorkTraker/workTraker";
+import moment from "moment";
+import Url from "../../redux/baseApi/forImageUrl";
+import { Image } from "antd";
 
 const workData = {
     status: "Completed",
@@ -50,6 +54,14 @@ const workData = {
 };
 
 const WorkTrakercompleted = () => {
+
+    const { id } = useParams();
+
+    const { data } = useGetFullCompletedWorkTrakerQuery(id);
+    const fullCompletedData = data?.data?.attributes;
+
+    console.log(fullCompletedData)
+
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [viewTarget, setViewTarget] = useState(null);
 
@@ -96,19 +108,19 @@ const WorkTrakercompleted = () => {
                     <div>
                         <h2 className="text-xl font-semibold">Booking Order Date & Time</h2>
                         <span className="flex items-center gap-2 text-gray-600">
-                            <IoTime className="text-[#778aebe0]" /> {workData.bookingDateTime}
+                            <IoTime className="text-[#778aebe0]" /> {moment(fullCompletedData?.serviceBooking?.bookingDateTime).format("MMM DD, YYYY hh:mm A")}
                         </span>
                     </div>
                     <div>
                         <h2 className="text-xl font-semibold">Duration Time</h2>
                         <span className="flex items-center gap-2 text-gray-600">
-                            <IoTime className="text-[#778aebe0]" /> {workData.duration}
+                            <IoTime className="text-[#778aebe0]" /> {fullCompletedData?.serviceBooking?.duration} day
                         </span>
                     </div>
                     <div>
                         <h2 className="text-xl font-semibold">Completion Date & Time</h2>
                         <span className="flex items-center gap-2 text-gray-600">
-                            <IoTime className="text-[#778aebe0]" /> {workData.completionDateTime}
+                            <IoTime className="text-[#778aebe0]" /> {moment(fullCompletedData?.serviceBooking?.completionDateTime).format("MMM DD, YYYY hh:mm A")}
                         </span>
                     </div>
                 </div>
@@ -116,42 +128,65 @@ const WorkTrakercompleted = () => {
                 <div className="border-t-2 border-b-2 border-dashed border-gray-300 my-5 py-2">
                     <h2 className="text-xl font-semibold mb-2">Working Address</h2>
                     <span className="flex items-center gap-2 text-gray-600">
-                        <IoLocationSharp className="text-[#778aebe0] text-2xl" /> {workData.address}
+                        <IoLocationSharp className="text-[#778aebe0] text-2xl" /> {fullCompletedData?.serviceBooking?.address?.en}
                     </span>
                 </div>
 
                 <div className="border p-3 rounded-lg">
-                    <h2 className="mb-2 text-xl font-semibold">Proof of Image</h2>
-                    <img
-                        className="w-full max-h-[30vh] rounded-lg"
-                        src={workData.proofImage}
-                        alt="Proof"
-                    />
+                    <h2 className="mb-2 text-xl font-semibold">Proof of work</h2>
+                    <div className="space-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        {
+                            fullCompletedData?.serviceBooking?.attachments?.map((img, idx) => (
+                                img?.attachmentType == "image" ?
+                                    <Image
+                                        key={idx}
+                                        className="w-full  rounded-lg"
+                                        src={img?.attachment?.includes('amazonaws') ? img?.attachment : Url + img?.attachment}
+                                        alt="Proof"
+                                    />
+                                    :
+                                    <iframe src={img?.attachment?.includes('amazonaws') ? img?.attachment : Url + img?.attachment} width="100%" frameborder="0"></iframe>
+                            ))
+                        }
+                    </div>
+
                 </div>
 
                 <div className="border p-3 my-5 rounded-lg">
                     <h2 className="mb-2 text-xl font-semibold">Services Payment Summary</h2>
-                    {workData.services.map((s, idx) => (
-                        <div key={idx} className="space-y-2">
-                            <div className="flex justify-between bg-blue-100 p-2 rounded-lg">
-                                <span className="font-semibold text-xl">Initial Cost</span>
-                                <span>
-                                    Start from: <span className="text-[#778aebe0] font-bold text-xl">${s.startPrice}</span>
-                                </span>
-                            </div>
-                            <div className="flex justify-between bg-blue-100 p-2 rounded-lg">
-                                <span className="font-semibold text-xl">Other Parts</span>
-                                <span className="text-[#778aebe0] font-bold text-xl">${s.otherParts}</span>
-                            </div>
-                            <div className="flex justify-between bg-blue-100 p-2 rounded-lg">
-                                <span className="font-semibold text-xl">Total Cost</span>
-                                <span className="text-[#778aebe0] font-bold text-xl">${s.totalCost}</span>
-                            </div>
+                    <div className="space-y-2">
+                        <div className="flex justify-between bg-blue-100 p-2 rounded-lg">
+                            <span className="font-medium text-base">Initial Cost</span>
+                            <span>
+                                Start from: <span className="text-[#778aebe0] font-bold text-xl">৳{fullCompletedData?.serviceBooking.startPrice}</span>
+                            </span>
                         </div>
-                    ))}
+                        {
+                            fullCompletedData?.additionalCosts?.map((s, index) => (
+                                <div key={index} className="flex justify-between bg-blue-100 p-2 rounded-lg">
+                                    <span className="font-medium text-base">{s.costName}</span>
+                                    <span className="text-[#778aebe0] font-bold text-xl">৳{s.price}</span>
+                                </div>
+                            ))
+                        }
+                        <hr />
+                        <div className="flex justify-between bg-green-100 p-2 rounded-lg">
+                            <span className="font-medium text-base">Sub Total Cost</span>
+                            <span className="text-[#778aebe0] font-bold text-xl">৳{fullCompletedData?.serviceBooking?.totalCost}</span>
+                        </div>
+                        <div className="flex justify-between bg-blue-100 p-2 rounded-lg">
+                            <span className="font-medium text-base">Admin Percentage Of Start Price</span>
+                            <span className="text-[#778aebe0] font-bold text-xl">-৳{fullCompletedData?.serviceBooking?.adminPercentageOfStartPrice.toFixed(2) || 0}</span>
+                        </div>
+                        <div className="flex justify-between bg-green-100 p-2 rounded-lg">
+                            <span className="font-semibold text-xl">Total Cost</span>
+                            <span className="text-[#778aebe0] font-bold text-xl">৳{fullCompletedData?.serviceBooking?.totalCost - fullCompletedData?.serviceBooking?.adminPercentageOfStartPrice || 0}</span>
+                        </div>
+                    </div>
+
                 </div>
 
-                <h2 className="flex items-center justify-between gap-5 border p-2 rounded-lg bg-blue-100 text-xl font-semibold">
+                {/* <h2 className="flex items-center justify-between gap-5 border p-2 rounded-lg bg-blue-100 text-xl font-semibold">
                     <span className="flex items-center gap-2">
                         <SiCcleaner className="text-[#778aebe0]" /> Home Cleaning
                     </span>
@@ -161,30 +196,28 @@ const WorkTrakercompleted = () => {
                             ${workData.services[0].startPrice}
                         </span>
                     </span>
-                </h2>
+                </h2> */}
 
                 {/* User and Provider */}
                 {["user", "provider"].map((role) => {
                     const person = workData[role];
+                    const personRole = role === "user" ? fullCompletedData?.serviceBooking?.userId : fullCompletedData?.serviceBooking?.providerId;
                     return (
-                        <div
-                            key={role}
-                            className="flex items-center gap-5 my-5 border p-3 rounded-lg cursor-pointer"
-                            onClick={() => handleShowDetails(role)}
-                        >
-                            <img
-                                className="w-20 h-20 rounded-full"
-                                src={person.image}
-                                alt={person.name}
-                            />
-                            <div>
-                                <h2 className="text-2xl font-semibold">{person.name}</h2>
-                                <p>{person.workType}</p>
-                                {person.rating && (
-                                    <span className="flex items-center gap-2 bg-[#778aebe0] rounded-full justify-center text-white py-1 px-3 mt-1">
-                                        {person.rating} <FaStar />
-                                    </span>
-                                )}
+                        <div>
+                            <div
+                                className="flex items-center gap-5 my-5 border p-3 rounded-lg cursor-pointer"
+                                onClick={() => handleShowDetails(role)}
+                            >
+                                <img
+                                    className="w-20 h-20 rounded-full"
+                                    src={personRole.profileImage?.imageUrl.includes('amazonaws') ? personRole.profileImage?.imageUrl : Url + personRole.profileImage?.imageUrl}
+                                    alt={personRole.name}
+                                />
+                                <div>
+                                    {/* // role show here  */}
+                                    <h2 className="text-2xl font-semibold">{personRole.providerId ? personRole.name : personRole.name}</h2>
+                                    <h2 className="text-xl font-medium text-gray-500">{role === "user" ? "User" : "Provider"}</h2>
+                                </div>
                             </div>
                         </div>
                     );
@@ -194,6 +227,7 @@ const WorkTrakercompleted = () => {
             {/* Details Drawer */}
             {detailsVisible && (
                 <div className="w-full md:w-2/5 border-2 border-blue-400 p-4 rounded-lg relative">
+
                     <div
                         onClick={handleBack}
                         className="absolute bg-[#778aebe0] p-3 rounded-full -top-5 -left-5 cursor-pointer"
@@ -201,13 +235,14 @@ const WorkTrakercompleted = () => {
                         <FaArrowLeft className="text-white text-xl" />
                     </div>
                     <div className="flex items-center gap-5 mb-5">
-                        <img
-                            className="w-24 h-24 rounded-full"
+                        <Image
+                            className="max-w-20 max-h-20 w-full h-full rounded-full"
                             src={selectedPerson.image}
                             alt={selectedPerson.name}
                         />
                         <h1 className="text-2xl font-semibold">{selectedPerson.name}</h1>
                     </div>
+
 
                     <div className="space-y-3">
                         <InfoRow label="Name" value={selectedPerson.name} />

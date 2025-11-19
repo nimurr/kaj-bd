@@ -137,7 +137,8 @@ const WorkTraker = () => {
 
     // Handle row click to navigate based on the status
     const onRowClick = (record) => {
-        navigate(`/work-traker/${record.status.toLowerCase().replace(' ', '-')}/${record.key}`);
+        console.log(record)
+        navigate(`/work-traker/${record.status.toLowerCase().replace(' ', '-')}/${record._ServiceBookingId}`);
     };
 
     return (
