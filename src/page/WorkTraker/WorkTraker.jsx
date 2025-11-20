@@ -25,6 +25,7 @@ const WorkTraker = () => {
     });
     const fullData = data?.data?.attributes?.results;
     const forPaginationData = data?.data?.attributes;
+    console.log(data)
 
     const navigate = useNavigate(); // Initialize navigate for dynamic routing
 
@@ -35,6 +36,12 @@ const WorkTraker = () => {
             dataIndex: 'no',
             key: 'no',
             render: (text, record, index) => <span>{index + 1}</span>,
+        },
+        {
+            title: 'Service Booking Id',
+            dataIndex: '_ServiceBookingId',
+            key: '_ServiceBookingId',
+            render: (text) => <span> {text?.slice(-7) || 'N/A'}</span>,
         },
         {
             title: 'Username',
@@ -63,7 +70,7 @@ const WorkTraker = () => {
         {
             title: 'Services Booking Date',
             dataIndex: 'bookingDateTime',
-            key: 'bookingDateTime', 
+            key: 'bookingDateTime',
             render: (text) => <span>{moment(text).format('DD MMM YYYY, h:mm A')}</span>,
         },
         {
