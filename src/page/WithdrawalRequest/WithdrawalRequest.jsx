@@ -96,7 +96,7 @@ const WithdrawalRequest = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
-            render: (s) => <span className={`capitalize ${s === "rejected" ? "text-yellow-500" : "text-green-600"}`}>{s}</span>
+            render: (s) => <span className={`capitalize ${s === "rejected" ? "text-red-500" : s === "completed" ? "text-green-600" : "text-yellow-600"}`}>{s}</span>
         },
         {
             title: 'Action',
@@ -206,6 +206,7 @@ const WithdrawalRequest = () => {
                                 <select className='py-1 px-5 rounded border border-[#778beb]' onChange={(e) => setStatus(e.target.value)} name="status" id="">
                                     <option value="rejected">Rejected</option>
                                     <option value="completed">Completed</option>
+                                    <option value="requested">Requested</option>
                                 </select>
                             </div>
                         </Form>
