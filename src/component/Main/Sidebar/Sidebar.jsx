@@ -27,7 +27,6 @@ const sidebarItems = [
     icon: <MdDashboard className="size-7" />,
   },
 
-
   {
     path: "/admins",
     name: "Sub Admin ",
@@ -61,7 +60,7 @@ const sidebarItems = [
   {
     path: "/transactions-history",
     name: "Transactions History",
-    icon: <TbCalendarDollar className="size-6" />,
+    icon: <TbCalendarDollar className="size-7" />,
   },
   {
     path: "/withdrawal-request",

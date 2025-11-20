@@ -55,6 +55,7 @@ import WorkTrakercompleted from "../page/WorkTraker/WorkTrakercompleted";
 import WorkTrakercancelled from "../page/WorkTraker/WorkTrakercancelled";
 import WorkTrakerInProgress from "../page/WorkTraker/WorkTrakerInProgress";
 import ContactUs from "../page/ContactUs/ContactUs";
+import TransactionHistory from "../page/TransactionHistory/TransactionHistory";
 
 
 
@@ -122,10 +123,10 @@ const router = createBrowserRouter([
         path: "withdrawal-request",
         element: <WithdrawalRequest />,
       },
-      // {
-      //   path: "subscription",
-      //   element: <Subscription />,
-      // },
+      {
+        path: "transactions-history",
+        element: <TransactionHistory />,
+      },
 
       {
         path: "earnings",
