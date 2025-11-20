@@ -122,7 +122,7 @@ const WithdrawalRequest = () => {
     };
 
     const [acceptAndReject] = useApproveAndRejectMutation();
-    console.log(modalData)
+    // console.log(modalData)
 
     const handleApprove = async () => {
 
