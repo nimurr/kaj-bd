@@ -14,7 +14,26 @@ const workTrakerApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
         }),
+        getCompletedUserDetails: builder.query({
+            query: (id) => ({
+                url: `/users/paginate/for-user?_id=${id}`,
+                method: "GET",
+            }),
+        }),
+        getCompletedProviderDetails: builder.query({
+            query: (id) => ({
+                url: `/users/paginate/for-provider?_id=${id}`,
+                method: "GET",
+            }),
+        }),
+    
+
     }),
 });
 
-export const { useGetAllWorkTrakerQuery , useGetFullCompletedWorkTrakerQuery } = workTrakerApi;
+export const {
+    useGetAllWorkTrakerQuery,
+    useGetFullCompletedWorkTrakerQuery,
+    useGetCompletedUserDetailsQuery,
+    useGetCompletedProviderDetailsQuery,
+} = workTrakerApi;
