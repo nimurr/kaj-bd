@@ -199,7 +199,7 @@ const Lawyera = () => {
             </ConfigProvider>
 
             {/* Custom Pagination */}
-            <div className="flex justify-center mt-5">
+            <div className="flex justify-end mt-5">
                 <Pagination
                     current={currentPage}
                     pageSize={pageSize}
