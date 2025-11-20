@@ -2,21 +2,6 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const IncomeGraphChart = ({fullData}) => {
-  // Sample Data for Income and Expenses over the months
-  const data = [
-    { month: 'Jan', income: 4, expenses: 2 },
-    { month: 'Feb', income: 9, expenses: 6 },
-    { month: 'Mar', income: 9.1, expenses: 8 },
-    { month: 'Apr', income: 3, expenses: 6.5 },
-    { month: 'May', income: 12, expenses: 7 },
-    { month: 'Jun', income: 12.9, expenses: 4 },
-    { month: 'Jul', income: 6, expenses: 8 },
-    { month: 'Aug', income: 7, expenses: 5 },
-    { month: 'Sep', income: 8, expenses: 6 },
-    { month: 'Oct', income: 10, expenses: 7.5 },
-    { month: 'Nov', income: 11, expenses: 8 },
-    { month: 'Dec', income: 12, expenses: 9 },
-  ];
 
   return (
     <section className="w-full col-span-full md:col-span-4 bg-white rounded-xl border-2 border-[#778beb] shadow-[0_4px_10px_rgba(0,0,0,0.2)]">

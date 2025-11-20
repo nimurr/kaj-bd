@@ -3,8 +3,10 @@ import { useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useGetDashboardStatusQuery } from "../../../redux/features/dashboard/dashboardApi";
 import { useBlockUserMutation, useUnBlockUserMutation } from "../../../redux/features/user/userApi";
+import moment from "moment";
 
-const RecentTransactions = () => {
+const RecentTransactions = ({ fullData }) => {
+  console.log(fullData?.results)
   const [searchText, setSearchText] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
@@ -13,7 +15,7 @@ const RecentTransactions = () => {
   const [selectedUser, setSelectedUser] = useState(null); // Store selected user details
 
   const { data: userData, isLoading } = useGetDashboardStatusQuery();
-  const recentUsers = userData?.recentUsers.slice(0, 8);
+  const recentUsers = userData?.recentUsers?.slice(0, 8);
 
   const [userBlock] = useBlockUserMutation();
   const [userUnBlock] = useUnBlockUserMutation();
@@ -63,15 +65,21 @@ const RecentTransactions = () => {
       align: "center",
     },
     {
-      title: "User Name",
-      dataIndex: "userName",
-      key: "userName",
+      title: "Full Name",
+      dataIndex: "name",
+      key: "name",
       align: "center",
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      align: "center",
+    },
+    {
+      title: "Phone Number",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
       align: "center",
     },
     {
@@ -100,11 +108,11 @@ const RecentTransactions = () => {
     },
   ];
 
-  const filteredData = recentUsers?.filter((user) => {
+  const filteredData = fullData?.results?.filter((user) => {
     const matchesText =
       `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchText.toLowerCase());
     const matchesDate = selectedDate
-      ? user.date === selectedDate.format("YYYY-MM-DD")
+      ? user.createdAt === selectedDate.format("YYYY-MM-DD")
       : true;
 
     return matchesText && matchesDate;
@@ -119,14 +127,15 @@ const RecentTransactions = () => {
   const dataSource = paginatedData?.map((user, index) => ({
     key: user.id,
     si: (currentPage - 1) * pageSize + index + 1, // Correct the serial number based on page
-    userName: `${user?.fullName}`,
-    email: user.email,
-    role: user.role,
-    joinDate: user.createdAt.split(",")[0],
+    name: `${user?.name}`,
+    phoneNumber: `${user?.phoneNumber}`,
+    email: user?.email,
+    role: user?.role,
+    joinDate: moment(user?.createdAt).format("YYYY-MM-DD"),
   }));
 
   return (
-    <div className="w-full col-span-full md:col-span-6 bg-white rounded-lg">
+    <div className="w-full col-span-full mb-5 md:col-span-6 bg-white rounded-lg">
       <div className="flex items-center justify-between flex-wrap my-10">
         <h1 className="text-2xl flex items-center">Recent User</h1>
       </div>
@@ -153,7 +162,7 @@ const RecentTransactions = () => {
       </ConfigProvider>
 
       {/* Custom Pagination Component */}
-      <div className="flex justify-center my-10">
+      {/* <div className="flex justify-center my-10">
         <Pagination
           current={currentPage}
           pageSize={pageSize}
@@ -166,7 +175,7 @@ const RecentTransactions = () => {
           pageSizeOptions={[10, 20, 50, 100]}
           style={{ display: "flex", justifyContent: "center", width: "100%" }} // Custom style for centering
         />
-      </div>
+      </div> */}
 
       {/* User Details Modal */}
       <Modal
@@ -178,10 +187,11 @@ const RecentTransactions = () => {
         {selectedUser && (
           <div>
             <h2 className="text-2xl font-semibold text-center mb-10">User Details</h2>
-            <p className="flex items-center justify-between my-5"><strong>Name:</strong> {selectedUser.userName}</p>
+            <p className="flex items-center justify-between my-5"><strong>Name:</strong> {selectedUser.name}</p>
             <p className="flex items-center justify-between my-5"><strong>Email:</strong> {selectedUser.email}</p>
             <p className="flex items-center justify-between my-5"><strong>Role:</strong> {selectedUser.role}</p>
-            <p className="flex items-center justify-between my-5"><strong>Join Date:</strong> {selectedUser.joinDate}</p>
+            <p className="flex items-center justify-between my-5"><strong>Phone Number:</strong> {selectedUser.phoneNumber}</p>
+            <p className="flex items-center justify-between my-5"><strong>Join Date:</strong> {moment(selectedUser.createdAt).format("YYYY-MM-DD")}</p>
           </div>
         )}
       </Modal>
