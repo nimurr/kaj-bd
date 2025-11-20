@@ -15,10 +15,10 @@ const WorkTraker = () => {
     const [selectedMonthly, setSelectedMonthly] = useState('');
     const [dataSource, setDataSource] = useState([]);
 
-    const { data } = useGetAllWorkTrakerQuery({ from: fromDate, to: toDate, status: selectedStatus });
+    const { data , isLoading } = useGetAllWorkTrakerQuery({ from: fromDate, to: toDate, status: selectedStatus });
     const fullData = data?.data?.attributes?.results;
 
-    console.log("fullData" , fullData);
+    // console.log("fullData" , fullData);
 
     const navigate = useNavigate(); // Initialize navigate for dynamic routing
 
@@ -202,6 +202,7 @@ const WorkTraker = () => {
                             showSizeChanger: true, // Allow page size changer
                             pageSizeOptions: ['3', '5', '10'], // Page size options
                         }}
+                        loading={isLoading}
                         rowKey="key"
                         onRow={(record) => ({
                             onClick: () => onRowClick(record), // Add onClick handler

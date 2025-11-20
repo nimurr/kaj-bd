@@ -14,6 +14,12 @@ const workTrakerApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
         }),
+        getFullNotCompletedWorkTraker: builder.query({
+            query: (id) => ({
+                url: `/service-bookings/paginate/for-admin?_id=${id}`,
+                method: "GET",
+            }),
+        }),
         getCompletedUserDetails: builder.query({
             query: (id) => ({
                 url: `/users/paginate/for-user?_id=${id}`,
@@ -26,7 +32,7 @@ const workTrakerApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
         }),
-    
+
 
     }),
 });
@@ -34,6 +40,7 @@ const workTrakerApi = baseApi.injectEndpoints({
 export const {
     useGetAllWorkTrakerQuery,
     useGetFullCompletedWorkTrakerQuery,
+    useGetFullNotCompletedWorkTrakerQuery,
     useGetCompletedUserDetailsQuery,
     useGetCompletedProviderDetailsQuery,
 } = workTrakerApi;
