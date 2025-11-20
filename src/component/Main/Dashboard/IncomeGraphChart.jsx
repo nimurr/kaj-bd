@@ -29,13 +29,13 @@ const IncomeGraphChart = () => {
           <Legend />
 
           {/* Line for Income */}
-          <Line
+          {/* <Line
             type="monotone"
             dataKey="income"
             stroke="#778beb" // Green color for income
             activeDot={{ r: 8 }}
             strokeWidth={4}
-          />
+          /> */}
           {/* Line for Expenses */}
           <Line
             type="monotone"
