@@ -17,8 +17,15 @@ const adminsApi = baseApi.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ["Admins"],
-        })
+        }),
+        removeAdmin: builder.mutation({
+            query: (id) => ({
+                url: `/users/remove-sub-admin/${id}`,
+                method: "PUT",
+            }),
+            invalidatesTags: ["Admins"],
+        }),
     })
 })
 
-export const { useGetAdminsQuery , useCreateNewAdminsMutation } = adminsApi
+export const { useGetAdminsQuery, useCreateNewAdminsMutation , useRemoveAdminMutation } = adminsApi

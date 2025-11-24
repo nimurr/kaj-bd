@@ -4,7 +4,7 @@ import { FaInfoCircle, FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import moment from "moment";
-import { useCreateNewAdminsMutation, useGetAdminsQuery } from "../../redux/features/admins/admins";
+import { useCreateNewAdminsMutation, useGetAdminsQuery, useRemoveAdminMutation } from "../../redux/features/admins/admins";
 
 const Lawyera = () => {
     const pageSize = 10;
@@ -25,7 +25,7 @@ const Lawyera = () => {
     ];
 
 
-    const { data, refetch } = useGetAdminsQuery({ page: currentPage, limit: pageSize });
+    const { data, refetch, isLoading } = useGetAdminsQuery({ page: currentPage, limit: pageSize });
     const fullData = data?.data?.attributes?.results || [];
     const pageItems = data?.data?.attributes?.totalPages || 0;
 
@@ -98,8 +98,10 @@ const Lawyera = () => {
     };
 
 
+    const [removeAdmin] = useRemoveAdminMutation();
+
     // Handle Delete Sub Admin
-    const handleDelete = (item) => {
+    const handleDelete = async (item) => {
 
         console.log(item)
         Swal.fire({
@@ -111,11 +113,19 @@ const Lawyera = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
             cancelButtonText: "No, cancel",
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                // Simulate delete
-                message.success("Sub Admin deleted successfully!");
-                  console.log(item)
+                try {
+                    const res = await removeAdmin(item._id).unwrap();
+                    console.log(res);
+                    if (res?.code === 200) {
+                        message.success(res?.message);
+                        refetch();
+                    }
+
+                } catch (error) {
+                    message.error(error?.data?.message, "Something went wrong");
+                }
             }
         });
     };
@@ -199,6 +209,7 @@ const Lawyera = () => {
                     dataSource={paginatedData}
                     rowKey="key"
                     bordered
+                    loading={isLoading}
                     className="shadow-md"
                 />
             </ConfigProvider>
