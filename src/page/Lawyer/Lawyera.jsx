@@ -129,17 +129,6 @@ const Lawyera = () => {
             render: (date) => moment(date).format("DD MMM YYYY"),
         },
         {
-            title: "Status",
-            dataIndex: "status",
-            key: "status",
-            render: (status) => <div>
-                {status == "Active" ?
-                    <span className="py-1 px-5 rounded-lg  bg-green-100 text-green-600">Active </span> :
-                    <span className="py-1 px-5 rounded-lg  bg-red-100 text-red-600">Inactive </span>
-                }
-            </div>,
-        },
-        {
             title: "Action",
             key: "action",
             render: (_, record) => (
@@ -152,13 +141,7 @@ const Lawyera = () => {
                         onClick={() => handleDelete(record)}
                         className="text-2xl cursor-pointer text-red-600 hover:text-red-500"
                     />
-                    <button
-                        onClick={() => handleOpenEditModal(record)}
-                        className="text-xl text-[#778beb] hover:text-[#778beb]"
-                    >
-                        <FaRegEdit />
-                    </button>
-                </div>
+                </div >
             ),
         },
     ];
