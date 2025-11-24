@@ -25,7 +25,7 @@ const EditPrivacyPolicy = () => {
 
     try {
       const res = await updatePrivacyPolicy({ details: content }).unwrap();
-      if (res?.success) {
+      if (res?.code === 200) {
         message.success(res?.message);
         navigate("/settings/privacy-policy");
       }
@@ -79,7 +79,7 @@ const EditPrivacyPolicy = () => {
           <div className="w-full flex justify-end mt-20 md:mt-16">
             <button
               type="submit"
-              className="bg-[#778beb] text-white text-xl gap-2 py-2 px-8 rounded-md font-bold"
+              className="bg-[#778beb] text-white text-xl gap-2 mt-3 py-2 px-8 rounded-md font-bold"
               disabled={isLoading}
             >
               {isLoading ? "Updating..." : "Update"}
