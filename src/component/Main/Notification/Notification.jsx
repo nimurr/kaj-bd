@@ -46,9 +46,9 @@ const Notification = () => {
     <div className="p-4">
       <Link to={"/"} className="text-2xl flex items-center mb-4"><FaAngleLeft /> Notification</Link>
 
-      <div className="space-y-4">
+      <div className="space-y-2">
         {paginatedNotifications?.map((item) => (
-          <div key={item.id} className="border border-[#778beb] hover:bg-[#778beb56] cursor-pointer rounded-md p-4 flex items-center space-x-4">
+          <div key={item.id} className="border border-[#778beb] hover:bg-[#778beb56] cursor-pointer rounded-md p-2 flex items-center space-x-4">
             <div className="text-[#778beb] border border-[#778beb] rounded-full p-2">
               <span className=" bg-[#778beb] p-1.5 rounded-full absolute ml-4 z-20"></span>
               <IoMdNotificationsOutline size={30} className="relative" />

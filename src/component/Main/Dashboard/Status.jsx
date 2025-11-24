@@ -3,6 +3,7 @@ import { PiCurrencyCircleDollar, PiUsers, PiUsersThreeFill } from "react-icons/p
 import { useGetDashboardStatusQuery } from "../../../redux/features/dashboard/dashboardApi";
 import { IoIosTrendingUp } from "react-icons/io";
 import { IoTrendingDown } from "react-icons/io5";
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
 const Status = ({ fullData, isLoading }) => {
 
   console.log(fullData)
@@ -97,7 +98,7 @@ const Status = ({ fullData, isLoading }) => {
 
             <div className="flex justify-between items-start p-5 rounded-lg border-2 border-gray-200">
               <div className="size-20 p-3 flex justify-center items-center rounded-full bg-[#778beb] text-white  ">
-                <FaUserCircle className="size-10" />
+                <MdOutlineMiscellaneousServices className="size-10 border-2 rounded-full p-1" />
               </div>
               <div className="space-y-2">
                 <h1 className="text-2xl text-right text-gray-700 font-semibold">Services booking</h1>

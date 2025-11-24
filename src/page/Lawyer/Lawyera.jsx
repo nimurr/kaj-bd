@@ -5,6 +5,8 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import moment from "moment";
 import { useCreateNewAdminsMutation, useGetAdminsQuery, useRemoveAdminMutation } from "../../redux/features/admins/admins";
+import Url from "../../redux/baseApi/forImageUrl";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 const Lawyera = () => {
     const pageSize = 10;
@@ -16,20 +18,13 @@ const Lawyera = () => {
     const [form] = Form.useForm();
     const [status, setStatus] = useState("Active");
 
-    // Demo data for testing
-    const demoSubAdmins = [
-        { id: 1, name: "John Doe", email: "john@example.com", phone: "123456789", createdAt: "2025-09-09T10:00:00Z", status: "Active" },
-        { id: 2, name: "Jane Smith", email: "jane@example.com", phone: "987654321", createdAt: "2025-09-08T12:00:00Z", status: "Inactive" },
-        { id: 3, name: "Alice Johnson", email: "alice@example.com", phone: "456789123", createdAt: "2025-09-07T09:00:00Z", status: "Active" },
-        // Add more demo data as required
-    ];
 
 
     const { data, refetch, isLoading } = useGetAdminsQuery({ page: currentPage, limit: pageSize });
     const fullData = data?.data?.attributes?.results || [];
     const pageItems = data?.data?.attributes?.totalPages || 0;
 
-    // console.log(fullData)
+    console.log(fullData)
 
 
     // Handle "View Details" Modal
@@ -229,6 +224,9 @@ const Lawyera = () => {
             <Modal open={isModalVisible} onCancel={handleCloseModal} footer={null} title="Sub Admin Details">
                 {selectedUser && (
                     <div className="text-gray-700">
+                        <div className="flex items-center justify-center mb-3">
+                            <img className="w-[350px] mx-atuo rounded-lg h-[350px]" src={selectedUser.profileImage?.imageUrl.includes('amazonaws') ? selectedUser.profileImage?.imageUrl : Url + selectedUser.profileImage?.imageUrl} alt="" />
+                        </div>
                         <p className="my-5 flex items-center justify-between"><strong>Full Name:</strong> {selectedUser.name}</p>
                         <p className="my-5 flex items-center justify-between"><strong>Email:</strong> {selectedUser.email}</p>
                         <p className="my-5 flex items-center justify-between"><strong>Role:</strong> {selectedUser.role}</p>
@@ -248,20 +246,24 @@ const Lawyera = () => {
 } */}
 
             {/* Add Sub Admin Modal */}
-            <Modal open={isAddModalVisible} onCancel={handleCloseAddModal} footer={null} title="Add New Sub Admin">
+            <Modal open={isAddModalVisible} onCancel={handleCloseAddModal} footer={null} >
+
+                <h2 className="text-2xl font-semibold mb-3 text-[#778beb]">Add New Sub Admin</h2>
+
                 <Form form={form} layout="vertical" onFinish={handleAddSubAdmin}>
                     <Form.Item label="Full Name" name="name" rules={[{ required: true, message: "Please enter full name" }]}>
-                        <Input placeholder="Enter full name" />
+                        <Input className="h-12" placeholder="Enter full name" />
                     </Form.Item>
                     <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please enter email" }]}>
-                        <Input placeholder="Enter email" />
+                        <Input className="h-12" placeholder="Enter email" />
                     </Form.Item>
                     <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please enter phone number" }]}>
-                        <Input placeholder="Enter password" />
+                        <Input className="h-12" placeholder="Enter password" />
                     </Form.Item>
-                    <div className="flex justify-end mt-4">
-                        <Button onClick={handleCloseAddModal} className="mr-3">Cancel</Button>
-                        <Button type="primary" htmlType="submit">Add Sub Admin</Button>
+                    <p className="text-blue-500 flex items-start gap-1"><IoInformationCircleOutline size={30} /> After creating the sub admin, an email will be sent to the sub admin with a link to set up their password.</p>
+                    <div className="flex justify-end flex-wrap mt-4">
+                        <button className="h-12 mr-3 px-10 py-2 rounded-md bg-[#f16060] text-white" onClick={handleCloseAddModal}  >Cancel</button>
+                        <button className="h-12 px-10 py-2 rounded-md bg-[#778beb] text-white" type="primary" htmlType="submit">Add Sub Admin</button>
                     </div>
                 </Form>
             </Modal>
