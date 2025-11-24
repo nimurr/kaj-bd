@@ -12,7 +12,7 @@ const Personalinfo = () => {
 
     const { data: userProfile, refetch } = useGetUserProfileQuery();
 
-    const user = userProfile?.data;
+    const user = userProfile?.data?.attributes;
     console.log(user);
 
     useEffect(() => {
@@ -30,12 +30,13 @@ const Personalinfo = () => {
                 <div className="lg:w-1/3 flex flex-col border border-dotted p-4 justify-center items-center gap-8">
                     <img
                         className="w-40 h-40 border p-2 rounded-full"
-                        src={user?.profileImageUrl ? Url + user?.profileImageUrl : User_Profile}
+                        src={user?.profileImage?.imageUrl.includes('amazonaws') ? user?.profileImage?.imageUrl : Url + user?.profileImage?.imageUrl
+                        }
                         alt="User Profile"
                     />
                     <div className="flex flex-col justify-center items-center text-center">
-                        <p className="text-lg md:text-xl">{user?.role}</p>
-                        <h1 className="text-2xl md:text-3xl font-medium">{user?.fullName}</h1>
+                        <p className="text-lg md:text-xl">{user?.role || "Admin"}</p>
+                        <h1 className="text-2xl md:text-3xl font-medium">{user?.name}</h1>
                     </div>
                 </div>
 
@@ -51,7 +52,7 @@ const Personalinfo = () => {
                                 </label>
                                 <Input
                                     placeholder="First name"
-                                    value={user?.fullName} // Raw text for name
+                                    value={user?.name} // Raw text for name
                                     className="p-4 cursor-pointer text-lg md:text-xl bg-[#ebf5f5] text-black rounded w-full mt-3 outline-none"
                                     type="text"
                                     readOnly
@@ -72,7 +73,7 @@ const Personalinfo = () => {
                             />
                         </div>
 
-                        <div className="flex-1">
+                        {/* <div className="flex-1">
                             <label htmlFor="phone" className="text-lg md:text-xl font-medium">
                                 Phone Number
                             </label>
@@ -83,7 +84,7 @@ const Personalinfo = () => {
                                 type="text"
                                 readOnly
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ const PersonalinfoEdit = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
     const { data: userProfile, isLoading, refetch } = useGetUserProfileQuery();
-    const user = userProfile?.data;
+    const user = userProfile?.data?.attributes;
 
     const [fileList, setFileList] = useState([]);
     const [imageUrl, setImageUrl] = useState(defaultUserImage);
@@ -24,11 +24,11 @@ const PersonalinfoEdit = () => {
     useEffect(() => {
         if (user) {
             form.setFieldsValue({
-                name: user.fullName || "",
+                name: user.name || "",
                 email: user.email || "",
             });
             setPhoneNumber(user.phoneNumber || "");
-            setImageUrl(user.profileImageUrl ? Url + user.profileImageUrl : defaultUserImage);
+            setImageUrl(user?.profileImage?.imageUrl.includes('amazonaws') ? user?.profileImage?.imageUrl : Url + user?.profileImage?.imageUrl);
         }
     }, [user, form]);
 
@@ -102,7 +102,7 @@ const PersonalinfoEdit = () => {
 
                             <div className="text-center mt-6">
                                 <p className="text-lg">Admin</p>
-                                <h1 className="text-2xl font-medium">{user?.fullName || "N/A"}</h1>
+                                <h1 className="text-2xl font-medium">{user?.name || "N/A"}</h1>
                             </div>
                         </div>
 
@@ -117,7 +117,7 @@ const PersonalinfoEdit = () => {
                                     <Input placeholder="Email" className="p-4 rounded-lg border-gray-300" readOnly />
                                 </Form.Item>
 
-                                <div className="flex flex-col">
+                                {/* <div className="flex flex-col">
                                     <label className="text-lg font-medium mb-2">Phone Number</label>
                                     <PhoneInput
                                         placeholder="Enter phone number"
@@ -127,7 +127,7 @@ const PersonalinfoEdit = () => {
                                         defaultCountry="bd"
                                         className="rounded-lg border-gray-300 py-3 focus:ring-blue-500 focus:border-blue-500 border-2 px-2"
                                     />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
