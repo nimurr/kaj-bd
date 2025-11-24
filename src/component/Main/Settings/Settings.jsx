@@ -51,7 +51,7 @@ const Settings = () => {
       title: "Contact Us",
       path: "contact-us",
     },
-   
+
   ];
 
   const handleNavigate = (value) => {
@@ -72,8 +72,8 @@ const Settings = () => {
     const { oldPassword, newPassword } = values;
     console.log("oldPassword", oldPassword, "newPassword", newPassword);
     const formData = {
-      oldPassword,
-      newPassword
+      currentPassword: oldPassword,
+      newPassword: newPassword
     }
 
     try {
@@ -87,7 +87,8 @@ const Settings = () => {
       }
 
     } catch (error) {
-      console.log(error);
+      console.log(error?.data?.message);
+      message.error(error?.data?.message ||"Something went wrong");
     }
 
 

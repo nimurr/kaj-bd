@@ -90,6 +90,22 @@ const settingApi = baseApi.injectEndpoints({
     }),
 
 
+    getContactUs: builder.query({
+      query: () => ({
+        url: "/contact-us",
+        method: "GET",
+        providesTags: ["Setting"],
+      }),
+    }),
+    updateContactUs: builder.mutation({
+      query: (data) => ({
+        url: "/contact-us",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Setting"],
+    }),
+
 
 
   }),
@@ -107,5 +123,11 @@ export const {
   useGetUserProfileQuery,
   useUpdateProfileMutation,
 
-  useGetAllNotificationQuery
+  useGetAllNotificationQuery,
+
+  useGetContactUsQuery,
+  useUpdateContactUsMutation
+
+
+
 } = settingApi;
