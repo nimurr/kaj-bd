@@ -1,10 +1,25 @@
 import { Pagination } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useGetAllNotificationQuery } from "../../../redux/features/setting/settingApi";
 import moment from "moment";
+
+import { io } from 'socket.io-client';
+import socketUrl from "../../../config/socketUrl";
+
+let AUTH_TOKEN = '';
+if (typeof window !== 'undefined') {
+  const token = localStorage.getItem('token');
+  if (token) {
+    AUTH_TOKEN = token;
+  }
+}
+
+let socketInstance = null;
+
+const socketUrls = socketUrl; // Define your socket URL here
 
 const Notification = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +55,44 @@ const Notification = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  // Socket connection handling
+  useEffect(() => {
+    // Initialize socket connection when the component is mounted
+    const socket = initializeSocket();
+
+    // Log socket connection status
+    socket.on('connect', () => {
+      console.log("✅ Socket Connected Successfully");
+    });
+
+    socket.on('connect_error', (error) => {
+      console.error("❌ Socket Connection Failed: ", error);
+    });
+
+    // Clean up the socket connection when the component is unmounted
+    return () => {
+      if (socketInstance) {
+        socketInstance.disconnect();
+        socketInstance = null;
+        console.log("❌ Socket Disconnected");
+      }
+    };
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+
+  const initializeSocket = () => {
+    if (!socketInstance) {
+      socketInstance = io(socketUrls, {
+        auth: { token: AUTH_TOKEN },
+        extraHeaders: { token: AUTH_TOKEN },
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+        timeout: 10000,
+      });
+    }
+    return socketInstance;
   };
 
   return (
