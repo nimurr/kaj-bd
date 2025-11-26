@@ -104,13 +104,13 @@ const CustomerSupport = () => {
             console.log(res)
         } catch (error) {
             console.log(error);
-            toast.error(error?.data?.message || "Something went wrong");
+            toast.error(error?.data?.message);
         }
     };
 
     return (
         <section>
-            <Toaster    />
+            {/* <Toaster richColors /> */}
             <div className="md:flex justify-between items-center py-6 mb-4">
                 <Link to={"/"} className="text-2xl flex items-center ">
                     All Customer Reports {detailsVisible ? "Details" : ""}
@@ -118,32 +118,35 @@ const CustomerSupport = () => {
 
             </div>
 
-            <div className={`${detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"} overflow-x-auto duration-500`}>
-                <ConfigProvider
-                    theme={{
-                        components: {
-                            Table: {
-                                headerBg: "#778beb",
-                                headerColor: "#fff",
-                                headerBorderRadius: 5,
+            <div className={`${detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"} duration-500`}>
+                <div className="w-full overflow-x-auto ">
+
+                    <ConfigProvider
+                        theme={{
+                            components: {
+                                Table: {
+                                    headerBg: "#778beb",
+                                    headerColor: "#fff",
+                                    headerBorderRadius: 5,
+                                },
                             },
-                        },
-                    }}
-                >
-                    <Table
-                        pagination={{
-                            position: ["bottomRight"],
-                            current: currentPage,
-                            onChange: setCurrentPage,
                         }}
-                        loading={false}
-                        scroll={{ x: "max-content" }}
-                        responsive={true}
-                        columns={columns}
-                        dataSource={dataSource}
-                        rowKey="id"
-                    />
-                </ConfigProvider>
+                    >
+                        <Table
+                            pagination={{
+                                position: ["bottomRight"],
+                                current: currentPage,
+                                onChange: setCurrentPage,
+                            }}
+                            loading={isLoading}
+                            scroll={{ x: "max-content" }}
+                            responsive={true}
+                            columns={columns}
+                            dataSource={dataSource}
+                            rowKey="id"
+                        />
+                    </ConfigProvider>
+                </div>
 
                 {/* Provider Details Section */}
                 <div className={`${detailsVisible ? "block" : "hidden"} duration-500`}>
