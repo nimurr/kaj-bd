@@ -8,6 +8,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { useGetAlluserSupportQuery, useStatusUpdateMutation } from "../../../redux/features/userSupport/userSupport";
 import Url from "../../../redux/baseApi/forImageUrl";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { toast, Toaster } from "sonner";
 
 const { Item } = Form;
 
@@ -103,11 +104,13 @@ const CustomerSupport = () => {
             console.log(res)
         } catch (error) {
             console.log(error);
+            toast.error(error?.data?.message || "Something went wrong");
         }
     };
 
     return (
         <section>
+            <Toaster    />
             <div className="md:flex justify-between items-center py-6 mb-4">
                 <Link to={"/"} className="text-2xl flex items-center ">
                     All Customer Reports {detailsVisible ? "Details" : ""}
