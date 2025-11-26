@@ -115,7 +115,7 @@ const CustomerSupport = () => {
 
             </div>
 
-            <div className={`${detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"} duration-500`}>
+            <div className={`${detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"} overflow-x-auto duration-500`}>
                 <ConfigProvider
                     theme={{
                         components: {
@@ -145,11 +145,11 @@ const CustomerSupport = () => {
                 {/* Provider Details Section */}
                 <div className={`${detailsVisible ? "block" : "hidden"} duration-500`}>
                     <div className="w-full md:w-3/4 mx-auto border-2 border-[#778beb] p-2 rounded-lg relative">
-                        <div onClick={() => setDetailsVisible(false)} className="absolute bg-[#778beb] p-3 rounded-full -top-5 -left-5 cursor-pointer">
+                        <div onClick={() => setDetailsVisible(false)} className="absolute bg-[#778beb] p-3 rounded-full -top-0 -left-5 cursor-pointer">
                             <FaArrowLeft className="text-xl text-yellow-50" />
                         </div>
                         {/* Provider Profile Section */}
-                        <div className="flex items-center justify-between flex-wrap gap-5 mb-5">
+                        <div className="flex items-center justify-between flex-wrap gap-5 ml-2 mb-5">
                             <div className="flex items-center gap-5">
                                 <img
                                     className="w-24 h-24 rounded-full"
@@ -179,7 +179,7 @@ const CustomerSupport = () => {
 
                             <div className="py-3 border-2 p-2 rounded-lg border-[#f1f1f1]">
                                 <p className="mb-3 text-gray-500"><span className="font-semibold text-black">Message:</span> {userDataFull?.supportMessage}</p>
-                                <img className="border  rounded-lg" src={userDataFull?.attachments[0]?.attachment.includes("amazonaws") ? userDataFull?.attachments[0]?.attachment : Url + userDataFull?.attachments[0]?.attachment} alt="" />
+                                <img className="border w-full rounded-lg" src={userDataFull?.attachments[0]?.attachment.includes("amazonaws") ? userDataFull?.attachments[0]?.attachment : Url + userDataFull?.attachments[0]?.attachment} alt="" />
                             </div>
 
                         </div>

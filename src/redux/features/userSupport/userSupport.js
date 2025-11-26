@@ -7,12 +7,14 @@ const userSupportApi = baseApi.injectEndpoints({
                 url: `/support-messages/paginate?page=${page}&limit=${limit}`,
                 method: "GET",
             }),
+            providesTags: ["UserSupport"],
         }),
         statusUpdate: builder.mutation({
             query: (id) => ({
                 url: `/support-messages/${id}`,
                 method: "PUT",
             }),
+            invalidatesTags: ["UserSupport"],
         }),
     }),
 });
