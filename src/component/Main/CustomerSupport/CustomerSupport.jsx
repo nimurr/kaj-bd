@@ -5,7 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { FaAngleLeft, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
-import { useGetAlluserSupportQuery } from "../../../redux/features/userSupport/userSupport";
+import { useGetAlluserSupportQuery, useStatusUpdateMutation } from "../../../redux/features/userSupport/userSupport";
 import Url from "../../../redux/baseApi/forImageUrl";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
@@ -95,6 +95,17 @@ const CustomerSupport = () => {
         },
     ];
 
+    const [statusUpdate] = useStatusUpdateMutation();
+
+    const handleComplete = async (item) => {
+        try {
+            const res = await statusUpdate(item._SupportMessageId).unwrap();
+            console.log(res)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <section>
             <div className="md:flex justify-between items-center py-6 mb-4">
@@ -148,7 +159,7 @@ const CustomerSupport = () => {
                                 <h1 className="text-2xl font-semibold">{userDataFull?.creatorId?.name}</h1>
                             </div>
                             <div>
-                                <button className="py-2 px-8 bg-[#778beb] text-white rounded hover:bg-[#778beb]">Complete</button>
+                                <button onClick={() => handleComplete(userDataFull)} className="py-2 px-8 bg-[#778beb] text-white rounded hover:bg-[#778beb]">Complete</button>
                             </div>
                         </div>
                         {/* Provider Details Section */}
