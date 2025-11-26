@@ -260,7 +260,8 @@ const Lawyera = () => {
                     <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please enter phone number" }]}>
                         <Input className="h-12" placeholder="Enter password" />
                     </Form.Item>
-                    <p className="text-blue-500 flex items-start gap-1"><IoInformationCircleOutline size={30} /> After creating the sub admin, an email will be sent to the sub admin with a link to set up their password.</p>
+                    <p className="text-blue-500 text-base flex items-start gap-1"><IoInformationCircleOutline size={30} /> After creating the sub admin, an email will be sent to the sub admin with the login credentials.
+                    </p>
                     <div className="flex justify-end flex-wrap mt-4">
                         <button className="h-12 mr-3 px-10 py-2 rounded-md bg-[#f16060] text-white" onClick={handleCloseAddModal}  >Cancel</button>
                         <button className="h-12 px-10 py-2 rounded-md bg-[#778beb] text-white" type="primary" htmlType="submit">Add Sub Admin</button>
