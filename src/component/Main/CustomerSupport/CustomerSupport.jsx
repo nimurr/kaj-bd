@@ -36,6 +36,8 @@ const CustomerSupport = () => {
     const [detailsVisible, setDetailsVisible] = useState(false);
     const [userDataFull, setUserDataFull] = useState(null);
 
+    console.log(userDataFull)
+
     useEffect(() => {
         if (!fullData) return;
 
@@ -77,7 +79,7 @@ const CustomerSupport = () => {
         { title: "Role", dataIndex: "role", key: "role", render: (text, record) => record.creatorId.role },
         {
             title: "Read Status", dataIndex: "role", key: "role",
-            render: (text, record) => record.isResolved ? <span className="text-green-600">Completed</span> : <span className="text-yellow-600">Progressing </span>
+            render: (text, record) => record.isResolved ? <span className="text-green-600">Resolved</span> : <span className="text-yellow-600"> Unresolved </span>
         },
         {
             title: "Joined Date",
@@ -102,6 +104,10 @@ const CustomerSupport = () => {
         try {
             const res = await statusUpdate(item._SupportMessageId).unwrap();
             console.log(res)
+            if (res?.code === 200) {
+                toast.success(res?.message);
+                setDetailsVisible(false);
+            }
         } catch (error) {
             console.log(error);
             toast.error(error?.data?.message);
@@ -165,7 +171,9 @@ const CustomerSupport = () => {
                                 <h1 className="text-2xl font-semibold">{userDataFull?.creatorId?.name}</h1>
                             </div>
                             <div>
-                                <button onClick={() => handleComplete(userDataFull)} className="py-2 px-8 bg-[#778beb] text-white rounded hover:bg-[#778beb]">Complete</button>
+                                <button onClick={() => handleComplete(userDataFull)} className={`py-2 px-8 ${!userDataFull?.isResolved ? "bg-green-600" : "bg-yellow-600"} text-white rounded hover:bg-[#778beb]`}>
+                                    {!userDataFull?.isResolved ? "Make It Resolved" : "Make It Unresolved"}
+                                </button>
                             </div>
                         </div>
                         {/* Provider Details Section */}

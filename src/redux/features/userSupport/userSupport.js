@@ -11,7 +11,7 @@ const userSupportApi = baseApi.injectEndpoints({
         }),
         statusUpdate: builder.mutation({
             query: (id) => ({
-                url: `/support-messages/${id}`,
+                url: `/support-messages/change-satus/${id}`,
                 method: "PUT",
             }),
             invalidatesTags: ["UserSupport"],
@@ -19,4 +19,4 @@ const userSupportApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetAlluserSupportQuery , useStatusUpdateMutation } = userSupportApi;
+export const { useGetAlluserSupportQuery, useStatusUpdateMutation } = userSupportApi;
