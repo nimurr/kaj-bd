@@ -104,7 +104,7 @@ const WorkTraker = () => {
                 }
                 return (
                     <span
-                        className={`${color === 'yellow' && 'text-orange-500 bg-orange-100 py-1 px-3 rounded-lg'
+                        className={`capitalize ${color === 'yellow' && 'text-orange-500 bg-orange-100 py-1 px-3 rounded-lg'
                             } ${color === 'red' && 'text-red-500 bg-red-100 py-1 px-3 rounded-lg'
                             } ${color === 'green' && 'text-green-500 bg-green-100 py-1 px-3 rounded-lg'
                             } ${color === 'blue' && 'text-blue-500 bg-blue-100 py-1 px-3 rounded-lg'
