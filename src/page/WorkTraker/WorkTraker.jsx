@@ -212,7 +212,7 @@ const WorkTraker = () => {
                     }}
                 >
                     <Table
-                    className='min-w-[1000px]'
+                        className='min-w-[1000px]'
                         columns={columns}
                         dataSource={dataSource}
                         pagination={{
