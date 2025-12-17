@@ -14,7 +14,13 @@ const providersApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
         }),
+        acceptAndRejectProvider: builder.mutation({
+            query: ({ status, id }) => ({
+                url: `/users/change-approval-status?approvalStatus=${status}&userId=${id}`,
+                method: "PUT",
+            }),
+        }),
     }),
 });
 
-export const { useGetAllProvidersQuery , useGetAllNewProvidersListQuery } = providersApi;
+export const { useGetAllProvidersQuery, useGetAllNewProvidersListQuery, useAcceptAndRejectProviderMutation } = providersApi;

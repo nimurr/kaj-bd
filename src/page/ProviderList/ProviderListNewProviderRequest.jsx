@@ -6,7 +6,8 @@ import { FaAngleLeft, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
 import Url from "../../redux/baseApi/forImageUrl.js";
-import { useGetAllNewProvidersListQuery } from "../../redux/features/providers/providers.js";
+import { useAcceptAndRejectProviderMutation, useGetAllNewProvidersListQuery } from "../../redux/features/providers/providers.js";
+import { toast, Toaster } from "sonner";
 
 const { Item } = Form;
 
@@ -15,8 +16,9 @@ const ProviderListNewProviderRequest = () => {
     const [toDate, setToDate] = useState('2222-12-31');
     const [searchData, setSearchData] = useState('');
 
-    const { data, isLoading } = useGetAllNewProvidersListQuery({ from: fromDate, to: toDate, searchData });
+    const { data, isLoading, refetch } = useGetAllNewProvidersListQuery({ from: fromDate, to: toDate, searchData });
     const fullUserData = data?.data?.attributes?.results;
+    const [approveStatusChange] = useAcceptAndRejectProviderMutation();
     console.log(fullUserData)
 
     const [searchText, setSearchText] = useState("");
@@ -62,6 +64,45 @@ const ProviderListNewProviderRequest = () => {
         setDetailsVisible(true); // Show user details section
     };
 
+
+
+    const handleAcceptRequest = async (user) => {
+        console.log(user);
+        try {
+            const res = await approveStatusChange({
+                id: user._id,
+                status: "accept"
+            }).unwrap();
+            console.log(res)
+            if (res?.code === 200) {
+                refetch();
+                toast.success(res?.message);
+            }
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error?.data?.message);
+        }
+    };
+
+    const handleDeclineRequest = async (user) => {
+        console.log(user);
+        try {
+            const res = await approveStatusChange({
+                id: user._id,
+                status: "reject"
+            }).unwrap();
+            console.log(res)
+            if (res?.code === 200) {
+                refetch();
+                toast.success(res?.message);
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(error?.data?.message);
+        }
+    };
+
     const columns = [
         { title: "#SI", dataIndex: "si", key: "si", render: (text, record, index) => index + 1 },
         { title: "Full Name", dataIndex: "name", key: "name" },
@@ -88,6 +129,7 @@ const ProviderListNewProviderRequest = () => {
 
     return (
         <section>
+            <Toaster />
             <div className="md:flex justify-between items-center space-y-2 py-6 mb-4">
                 <Link to={"/provider-list"} className="text-2xl flex items-center ">
                     <FaAngleLeft />New Provider list  {detailsVisible ? "Details" : ""}
@@ -167,8 +209,8 @@ const ProviderListNewProviderRequest = () => {
                                     <h1 className="text-2xl font-semibold capitalize">{userDataFull?.name}</h1>
                                 </div>
                                 <div className="flex items-center gap-2 ">
-                                    <button className="py-2 px-8 rounded-lg bg-[#778beb] text-white">Accept </button>
-                                    <button className="py-2 px-8 rounded-lg bg-[#e03939] text-white">Reject </button>
+                                    <button onClick={() => handleAcceptRequest(userDataFull)} className="py-2 px-8 rounded-lg bg-[#778beb] text-white">Accept </button>
+                                    <button onClick={() => handleDeclineRequest(userDataFull)} className="py-2 px-8 rounded-lg bg-[#e03939] text-white">Reject </button>
                                 </div>
                             </div>
                         </div>
@@ -209,10 +251,10 @@ const ProviderListNewProviderRequest = () => {
                             <div className=''>
                                 <h2 className="text-2xl font-semibold my-3" >FaceImage From Front Cam</h2>
                                 {
-                                    userDataFull?.faceImageFromFrontCam[0] ?  
-                                    <img className="w-full" src={userDataFull?.faceImageFromFrontCam[0]?.includes('amazonaws') ? userDataFull?.faceImageFromFrontCam[0] : Url + userDataFull?.faceImageFromFrontCam[0]} alt="" />
-                                    :
-                                    "--"
+                                    userDataFull?.faceImageFromFrontCam[0] ?
+                                        <img className="w-full" src={userDataFull?.faceImageFromFrontCam[0]?.includes('amazonaws') ? userDataFull?.faceImageFromFrontCam[0] : Url + userDataFull?.faceImageFromFrontCam[0]} alt="" />
+                                        :
+                                        "--"
                                 }
                             </div>
 
