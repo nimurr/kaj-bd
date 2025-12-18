@@ -9,6 +9,8 @@ const DashboardHome = () => {
   const { data, isLoading } = useGetDashboardStatusQuery();
   const fullData = data?.data?.attributes || [];
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
 
   return (
     <section>

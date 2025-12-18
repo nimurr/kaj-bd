@@ -14,7 +14,7 @@ const WorkTraker = () => {
     const [selectedMonthly, setSelectedMonthly] = useState('');
     const [dataSource, setDataSource] = useState([]);
     const [page, setPage] = useState(1);  // Current page number
-    const [limit, setLimit] = useState(10);  // Items per page
+    const [limit, setLimit] = useState(20);  // Items per page
 
     const { data, isLoading } = useGetAllWorkTrakerQuery({
         from: fromDate,
@@ -25,7 +25,7 @@ const WorkTraker = () => {
     });
     const fullData = data?.data?.attributes?.results;
     const forPaginationData = data?.data?.attributes;
-    console.log(data)
+    console.log(forPaginationData)
 
     const navigate = useNavigate(); // Initialize navigate for dynamic routing
 
