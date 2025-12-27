@@ -130,35 +130,36 @@ const WorkTraker = () => {
                 </Form>
             </div>
 
-            <ConfigProvider
-                theme={{
-                    components: {
-                        Table: {
-                            headerBg: '#778beb',
-                            headerColor: '#fff',
+            <div clsassName="w-full overflow-x-auto">
+                <ConfigProvider
+                    theme={{
+                        components: {
+                            Table: {
+                                headerBg: '#778beb',
+                                headerColor: '#fff',
+                            },
                         },
-                    },
-                }}
-            >
-                <Table
-                    columns={columns}
-                    dataSource={dataSource}
-                    rowKey="_ServiceBookingId"
-                    loading={isLoading}
-                    pagination={{
-                        current: page,
-                        pageSize: limit,
-                        total,
-                        showSizeChanger: true,
-                        pageSizeOptions: ['5', '10', '20'],
-                        onChange: handlePageChange,
                     }}
-                    onRow={(record) => ({
-                        onClick: () => onRowClick(record),
-                        className: 'cursor-pointer',
-                    })}
-                />
-            </ConfigProvider>
+                >
+                    <Table 
+                        columns={columns}
+                        dataSource={dataSource}
+                        rowKey="_ServiceBookingId"
+                        loading={isLoading}
+                        pagination={{
+                            current: page,
+                            pageSize: limit,
+                            total,
+                            showSizeChanger: true, 
+                            onChange: handlePageChange,
+                        }}
+                        onRow={(record) => ({
+                            onClick: () => onRowClick(record),
+                            className: 'cursor-pointer',
+                        })}
+                    />
+                </ConfigProvider>
+            </div>
         </div>
     );
 };
