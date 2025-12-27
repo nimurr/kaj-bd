@@ -73,6 +73,8 @@ const ProviderList = () => {
     },
   ];
 
+  console.log(pagination?.totalResults)
+
   // ================= JSX =================
   return (
     <section>
@@ -159,7 +161,7 @@ const ProviderList = () => {
               pagination={{
                 current: pagination?.page,
                 pageSize: pagination?.limit,
-                total: pagination?.totalResults,
+                total: pagination?.totalResults, // Total number of items
                 position: ["bottomCenter"],
                 onChange: (page) => setPage(page),
               }}
