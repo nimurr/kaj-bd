@@ -6,11 +6,16 @@ import { FaAngleLeft, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoEyeOutline } from "react-icons/io5";
 import Url from "../../redux/baseApi/forImageUrl.js";
-import { useGetAllProvidersQuery } from "../../redux/features/providers/providers.js";
+import { useAcceptAndRejectProviderMutation, useGetAllProvidersQuery } from "../../redux/features/providers/providers.js";
+import { toast, Toaster } from "sonner";
 
 const { Item } = Form;
 
 const ProviderList = () => {
+
+  const [approveStatusChange, { isLoading: isLoadingStatusChange }] =
+    useAcceptAndRejectProviderMutation();
+
   // ================= STATE =================
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
@@ -19,9 +24,11 @@ const ProviderList = () => {
 
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [userDataFull, setUserDataFull] = useState(null);
+  const status = "accept";
 
   // ================= API =================
-  const { data, isLoading } = useGetAllProvidersQuery({
+  const { data, isLoading, refetch } = useGetAllProvidersQuery({
+    status,
     page,
     limit,
     searchData: searchText,
@@ -42,6 +49,25 @@ const ProviderList = () => {
   const handleShowDetails = (user) => {
     setUserDataFull(user);
     setDetailsVisible(true);
+  };
+
+  const handleUserRemove = async (user) => {
+    try {
+      const res = await approveStatusChange({
+        id: user._id,
+        status: "reject",
+      }).unwrap();
+      console.log(res)
+
+      if (res?.code === 200) {
+        toast.success(res.message);
+        setDetailsVisible(false);
+        refetch();
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error?.data?.message || "Something went wrong");
+    }
   };
 
   // ================= COLUMNS =================
@@ -88,10 +114,16 @@ const ProviderList = () => {
         </Link>
 
         {/* FILTERS */}
-        <Form layout="inline" className="flex space-x-2">
+        <Form layout="inline" className="flex gap-2 ">
+          <Link
+            to="/provider-list/rejected-provider"
+            className="py-2 px-8 text-white hover:!text-white rounded-lg bg-[#f56565]"
+          >
+            Rejected Provider
+          </Link>
           <Link
             to="/provider-list/new-provider-request"
-            className="py-2 px-8 text-white rounded-lg bg-[#778beb]"
+            className="py-2 px-8 text-white  hover:!text-white rounded-lg bg-[#778beb]"
           >
             New Provider Request
           </Link>
@@ -198,7 +230,7 @@ const ProviderList = () => {
                   </h1>
                 </div>
                 <div>
-                  <button className="py-2 px-8 bg-[#778beb] text-white rounded">Block</button>
+                  <button onClick={() => handleUserRemove(userDataFull)} className="py-2 px-8 bg-[#fa5f5f] text-white rounded">Block</button>
                 </div>
               </div>
 

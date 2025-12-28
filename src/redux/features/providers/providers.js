@@ -3,8 +3,8 @@ import { baseApi } from "../../baseApi/baseApi";
 const providersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllProviders: builder.query({
-            query: ({ page, limit, searchData, from, to }) => ({
-                url: `/users/paginate/for-provider?name=${searchData}&providerApprovalStatus=accept&from=${from}&to=${to}&page=${page}&limit=${limit}`,
+            query: ({ status, page, limit, searchData, from, to }) => ({
+                url: `/users/paginate/for-provider?name=${searchData}&providerApprovalStatus=${status}&from=${from}&to=${to}&page=${page}&limit=${limit}`,
                 method: "GET",
             }),
         }),

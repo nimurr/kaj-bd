@@ -24,6 +24,7 @@ const ProviderListNewProviderRequest = () => {
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [userDataFull, setUserDataFull] = useState(null);
 
+
   // ================= API =================
   const { data, isLoading, refetch } =
     useGetAllNewProvidersListQuery({
@@ -158,7 +159,7 @@ const ProviderListNewProviderRequest = () => {
               }}
             />
           </Item> */}
-{/* 
+          {/* 
           <Item>
             <button
               type="button"
@@ -172,9 +173,8 @@ const ProviderListNewProviderRequest = () => {
 
       {/* CONTENT */}
       <div
-        className={`${
-          detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"
-        }`}
+        className={`${detailsVisible ? "grid lg:grid-cols-2 gap-5" : "block"
+          }`}
       >
         {/* TABLE */}
         <ConfigProvider
@@ -224,7 +224,7 @@ const ProviderListNewProviderRequest = () => {
                       )
                         ? userDataFull?.profileImage?.imageUrl
                         : Url +
-                          userDataFull?.profileImage?.imageUrl
+                        userDataFull?.profileImage?.imageUrl
                     }
                     alt=""
                   />

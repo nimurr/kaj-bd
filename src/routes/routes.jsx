@@ -58,6 +58,7 @@ import ContactUs from "../page/ContactUs/ContactUs";
 import TransactionHistory from "../page/TransactionHistory/TransactionHistory";
 import CustomerSupport from "../component/Main/CustomerSupport/CustomerSupport";
 import AdminPrivetRoutes from "../utils/AdminPrivetRoutes";
+import RejectedProviderListNewProviderRequest from "../page/ProviderList/RejectedProviderListNewProviderRequest";
 
 
 
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: "provider-list",
         element: <ProviderList />,
+      },
+      {
+        path: "provider-list/rejected-provider",
+        element: <RejectedProviderListNewProviderRequest />,
       },
       {
         path: "provider-list/new-provider-request",
