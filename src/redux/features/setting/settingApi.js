@@ -45,6 +45,22 @@ const settingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Setting"],
     }),
+    getTermsAndConditions: builder.query({
+      query: () => ({
+        url: "/settings?type=termsAndConditions",
+        method: "GET",
+        providesTags: ["Setting"],
+      }),
+    }),
+    updateTermsAndConditions: builder.mutation({  // ✅ FIXED: Use mutation instead of query
+      query: (data) => ({
+        url: "/settings?type=termsAndConditions",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Setting"],
+    }),
+
     updateAboutUs: builder.mutation({  // ✅ FIXED: Use mutation instead of query
       query: (data) => ({
         url: "/general-info/update/about-us",
@@ -115,6 +131,13 @@ export const {
   useGetAllSettingsQuery,
   useUpdatePrivacyPolicyAllMutation, // ✅ FIXED: Mutation hook 
   useUpdateTramsAndConditionsAllMutation,
+
+
+  useGetTermsAndConditionsQuery,
+  useUpdateTermsAndConditionsMutation,
+
+
+
 
   useAddFaqMainMutation,
   useDeleteFaqMutation,

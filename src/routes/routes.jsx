@@ -116,8 +116,6 @@ const router = createBrowserRouter([
         path: "work-traker/in-progress/:id",
         element: <WorkTrakerInProgress />,
       },
-
-
       {
         path: "withdrawal-request",
         element: <WithdrawalRequest />,
@@ -126,7 +124,6 @@ const router = createBrowserRouter([
         path: "transactions-history",
         element: <TransactionHistory />,
       },
-
       {
         path: "earnings",
         element: <Earnings />,

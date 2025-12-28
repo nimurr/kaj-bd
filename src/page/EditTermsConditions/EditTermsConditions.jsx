@@ -4,15 +4,13 @@ import { Button, Form, message } from "antd";
 import ReactQuill from "react-quill"; // Import React Quill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { useState } from "react";
-import { useUpdateTramsAndConditionsAllMutation } from "../../redux/features/setting/settingApi";
+import { useUpdateTermsAndConditionsMutation } from "../../redux/features/setting/settingApi";
 
 const EditTermsConditions = () => {
 
-  const [updateTramsAndCondition, { isLoading }] = useUpdateTramsAndConditionsAllMutation();
+  const [updateTramsAndCondition, { isLoading }] = useUpdateTermsAndConditionsMutation();
 
   const navigate = useNavigate();
-
-
 
 
 
@@ -26,9 +24,9 @@ const EditTermsConditions = () => {
     // Handle form submission, e.g., update the Terms and Conditions in the backend
 
     try {
-      const res = await updateTramsAndCondition({ termsAndConditions: content }).unwrap();
+      const res = await updateTramsAndCondition({ details: content }).unwrap();
       console.log(res);
-      if (res?.success) {
+      if (res?.code === 200) {
         message.success(res?.message);
         navigate("/settings/terms-conditions");
       }
