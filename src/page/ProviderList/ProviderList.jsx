@@ -119,7 +119,7 @@ const ProviderList = () => {
             to="/provider-list/rejected-provider"
             className="py-2 px-8 text-white hover:!text-white rounded-lg bg-[#f56565]"
           >
-            Rejected Provider
+            Blocked Providers
           </Link>
           <Link
             to="/provider-list/new-provider-request"

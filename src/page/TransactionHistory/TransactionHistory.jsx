@@ -15,7 +15,7 @@ const TransactionHistory = () => {
     const pageSize = 10; // Number of items per page
 
     // API call to fetch transaction history
-    const { data: withdrawalData, refetch, isLoading } = useGetPaymentTransactionsHistoryQuery({ status, searchText   });
+    const { data: withdrawalData, refetch, isLoading } = useGetPaymentTransactionsHistoryQuery({ status, searchText, page: currentPage, limit: pageSize });
     const fullwithdrawalData = withdrawalData?.attributes?.results || [];
     const totalResults = withdrawalData?.attributes?.totalResults || 0;  // Total number of transactions
 

@@ -109,7 +109,7 @@ const RejectedProviderListNewProviderRequest = () => {
                 <Link to="/provider-list" className="text-2xl flex items-center">
                     <FaAngleLeft />
                     <span className="ml-2">
-                        Rejected  Provider list {detailsVisible ? "Details" : ""}
+                        Blocked Providers list {detailsVisible ? "Details" : ""}
                     </span>
                 </Link>
 
