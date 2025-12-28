@@ -18,6 +18,7 @@ const ContactUs = () => {
         e.preventDefault();
         const number = e.target.number.value;
         const email = e.target.email.value;
+        const detailsoverview = e.target.detailsoverview.value;
         const formData = {
             phoneNumber: number,
             email
@@ -50,16 +51,20 @@ const ContactUs = () => {
                     <h1 className="text-2xl font-semibold">Contact Us</h1>
                 </Link>
             </div>
-            <div className='grid lg:grid-cols-2 gap-10'>
-                <div className='bg-gray-100 p-5 rounded-lg'>
-                    <h2 className='my-5 text-xl underline'>Contact Details</h2>
+            <div className='grid lg:grid-cols-2 gpa-5 lg:gap-10'>
+                <div className='bg-gray-100 p-5 lg:p-10 rounded-lg'>
+                    <h2 className='my-5 text-2xl underline text-center'>Contact Details</h2>
                     <div>
                         <span className='font-semibold text-xl mb-2'>Eamil</span>
                         <h2>{fullData?.email}</h2>
                     </div>
-                    <div className='mt-2'>
+                    <div className='mt-8'>
                         <span className='font-semibold text-xl mb-2'>Phone Number</span>
                         <h2>{fullData?.phoneNumber}</h2>
+                    </div>
+                    <div className='mt-8'>
+                        <span className='font-semibold text-xl mb-2'>Details Overview</span>
+                        <h2>{fullData?.detailsoverview || "Not Found"}</h2>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className='bg-gray-100 p-5 rounded-lg'>
@@ -70,6 +75,10 @@ const ContactUs = () => {
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Phone Number</span>
                         <input className='p-2 rounded-lg w-full ' placeholder='Enter Your Contact Number' type="number" name="number" id="" />
+                    </div>
+                    <div className='mt-2'>
+                        <span className='font-semibold text-xl mb-2 block'>Details Overview</span>
+                        <textarea rows={4} name="detailsoverview" className='w-full p-2 rounded-lg' placeholder='Enter Your Details' id=""></textarea>
                     </div>
                     <div className='mt-5'>
                         <button className='py-2 px-8 rounded-lg bg-[#778beb] text-white'>Update</button>
