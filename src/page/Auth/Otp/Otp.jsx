@@ -16,6 +16,13 @@ import logoimage from '/public/logo/main_logo.png';
 const Otp = () => {
   const [otp, setOtp] = useState("");
   const { email } = useParams();
+  // token form search params
+  const searchParams = new URLSearchParams(window.location.search);
+  const token = searchParams.get("token");
+ 
+
+  console.log(token)
+
   const navigate = useNavigate();
   const [forgotPassword] = useForgotPasswordMutation();
   const [verifyOtp, { isLoading }] = useVerifyEmailMutation();
@@ -23,9 +30,14 @@ const Otp = () => {
     setOtp(otpValue);
   };
   const handleMatchOtp = async () => {
+    console.log(otp,
+      email,
+      token,)
     try {
       const res = await verifyOtp({
-        otp
+        otp,
+        email,
+        token,
       }).unwrap();
       console.log(res);
       if (res.error) {
@@ -33,11 +45,12 @@ const Otp = () => {
       }
       if (res) {
         localStorage.setItem("jwtToken", res?.changePasswordToken);
-        toast.success(res?.data?.message);
+        toast.success(res?.message);
         navigate(`/auth/new-password/${email}`);
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      console.log(error)
+      toast.error(error?.data?.message || "Something went wrong");
     }
   };
 
@@ -66,7 +79,7 @@ const Otp = () => {
 
         <div className="">
           <div className="mb-5 space-y-5">
-             <img src={logoimage} className="w-[100px] rounded-full shadow-xl h-[100px] mx-auto mb-5" alt="" />
+            <img src={logoimage} className="w-[100px] rounded-full shadow-xl h-[100px] mx-auto mb-5" alt="" />
             <h1 className="font-semibold text-xl flex items-center gap-2">
               <Link to="/auth/login">
                 <IoIosArrowBack />

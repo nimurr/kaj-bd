@@ -22,9 +22,10 @@ const ForgetPassword = () => {
         toast.error(res?.error?.data?.message);
         console.log(res.error);
       }
-      if (res.data) {
+      if (res) {
         toast.success(res.data.message);
-        navigate(`/auth/otp/${values?.email}`);
+        console.log(res?.data?.data?.attributes?.resetPasswordToken);
+        navigate(`/auth/otp/${values?.email}?token=${res?.data?.data?.attributes?.resetPasswordToken}`);
       }
     } catch (error) {
       toast.error("Something went wrong");
