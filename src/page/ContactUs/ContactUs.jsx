@@ -18,10 +18,11 @@ const ContactUs = () => {
         e.preventDefault();
         const number = e.target.number.value;
         const email = e.target.email.value;
-        const detailsoverview = e.target.detailsoverview.value;
+        const detailsOverview = e.target.detailsOverview.value;
         const formData = {
             phoneNumber: number,
-            email
+            email,
+            detailsOverview
         }
 
         try {
@@ -31,6 +32,7 @@ const ContactUs = () => {
             if (response?.code === 200) {
                 message.success(response?.message);
                 refetch()
+                e.target.reset();
             }
 
         } catch (error) {
@@ -64,7 +66,7 @@ const ContactUs = () => {
                     </div>
                     <div className='mt-8'>
                         <span className='font-semibold text-xl mb-2'>Details Overview</span>
-                        <h2>{fullData?.detailsoverview || "Not Found"}</h2>
+                        <h2>{fullData?.detailsOverview || "Not Found"}</h2>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className='bg-gray-100 p-5 rounded-lg'>
@@ -78,7 +80,7 @@ const ContactUs = () => {
                     </div>
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Details Overview</span>
-                        <textarea rows={4} name="detailsoverview" className='w-full p-2 rounded-lg' placeholder='Enter Your Details' id=""></textarea>
+                        <textarea rows={4} name="detailsOverview" className='w-full p-2 rounded-lg' placeholder='Enter Your Details' id=""></textarea>
                     </div>
                     <div className='mt-5'>
                         <button className='py-2 px-8 rounded-lg bg-[#778beb] text-white'>Update</button>
