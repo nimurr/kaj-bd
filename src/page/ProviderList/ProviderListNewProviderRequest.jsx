@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ConfigProvider, Table, Form, Input, DatePicker } from "antd";
+import { ConfigProvider, Table, Form, Input, DatePicker, Image } from "antd";
 import moment from "moment";
 import { IoIosSearch } from "react-icons/io";
 import { FaAngleLeft, FaArrowLeft } from "react-icons/fa";
@@ -253,6 +253,7 @@ const ProviderListNewProviderRequest = () => {
                 </div>
               </div>
 
+
               {/* DETAILS INFO */}
               {[
                 ["Email", userDataFull?.email],
@@ -273,6 +274,19 @@ const ProviderListNewProviderRequest = () => {
                   <span>{value}</span>
                 </div>
               ))}
+
+              <div>
+                <h2 className="text-xl font-semibold mt-4 mb-2">Face Image from Front Camera</h2>
+                <Image className="w-full" src={userDataFull?.faceImageFromFrontCam[0]} alt="" />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold mt-4 mb-2">NID Front Side Image</h2>
+                <Image className="w-full" src={userDataFull?.frontSideCertificateImage[0]} alt="" />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold mt-4 mb-2">NID Back Side Image</h2>
+                <Image className="w-full" src={userDataFull?.backSideCertificateImage[0]} alt="" />
+              </div>
             </div>
           </div>
         )}
