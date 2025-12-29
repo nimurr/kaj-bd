@@ -262,11 +262,28 @@ const WithdrawalRequest = () => {
             >
                 {modalData && (
                     <div className="space-y-3 capitalize">
+                        <br />
                         <p className="flex items-center justify-between">
                             <strong>Name:</strong> {modalData?.userId?.name}
                         </p>
                         <p className="flex items-center justify-between">
                             <strong>Email:</strong> {modalData?.userId?.email}
+                        </p>
+                        <hr className="my-5 block" />
+                        <p className="flex items-center justify-between">
+                            <strong>Wallet Id:</strong> {modalData?.walletId}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Request Date:</strong>{" "}
+                            {moment(modalData?.requestedAt).format("DD MMM YYYY")}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Status:</strong>{" "}
+                            {modalData?.status || "------"}
+                        </p>
+                        <hr className="my-5 block" />
+                        <p className="flex items-center justify-between">
+                            <strong>Payment Type:</strong> {modalData?.type || "------"}
                         </p>
                         <p className="flex items-center justify-between">
                             <strong>Bank:</strong> {modalData?.bankName || "------"}
@@ -274,13 +291,6 @@ const WithdrawalRequest = () => {
                         <p className="flex items-center justify-between">
                             <strong>Account:</strong>{" "}
                             {modalData?.bankAccountNumber || "------"}
-                        </p>
-                        <p className="flex items-center justify-between">
-                            <strong>Amount:</strong> ৳
-                            {modalData?.requestedAmount || "------"}
-                        </p>
-                        <p className="flex items-center justify-between">
-                            <strong>Payment Type:</strong> {modalData?.type || "------"}
                         </p>
                         <p className="flex items-center justify-between">
                             <strong>Mobile Banking Type:</strong>{" "}
@@ -291,9 +301,11 @@ const WithdrawalRequest = () => {
                             {modalData?.mobileNo || "------"}
                         </p>
                         <p className="flex items-center justify-between">
-                            <strong>Request Date:</strong>{" "}
-                            {moment(modalData?.requestedAt).format("DD MMM YYYY")}
+                            <strong>Amount:</strong> ৳
+                            {modalData?.requestedAmount || "------"}
                         </p>
+
+                        <hr className="my-5 block" />
 
                         {modalData?.proofOfPayment?.[0] && (
                             <img

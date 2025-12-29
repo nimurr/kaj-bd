@@ -22,12 +22,12 @@ const EditAboutUs = () => {
     }
   }, [privacyPolicy]);
 
-  const handleSubmit = async () => {
-    console.log("Updated About Us Content:", content);
+  const handleSubmit = async () => { 
 
     try {
-      const res = await updateAboutUs({ aboutUs: content }).unwrap();
-      if (res?.success) {
+      const res = await updateAboutUs({ details: content }).unwrap();
+      console.log(res)
+      if (res?.code === 200) {
         message.success(res?.message);
         navigate("/settings/about-us");
       }
@@ -36,7 +36,7 @@ const EditAboutUs = () => {
       message.error("Failed to update About Us.");
     }
   };
- 
+
 
   return (
     <section className="w-full h-full min-h-screen">
@@ -75,13 +75,14 @@ const EditAboutUs = () => {
               style={{ height: "300px" }}
             />
           </Form.Item>
+          <br />
 
           {/* Update Button */}
-          <div className="flex justify-end md:mt-16 mt-20">
+          <div className="flex justify-end md:mt-8 mt-16 ">
             <Button
               type="primary"
               htmlType="submit"
-              className="bg-[#778beb] text-white px-5 text-xl py-2 rounded-md"
+              className="bg-[#778beb] text-white px-5 text-xl py-3 h-10 rounded-md"
               loading={isLoading || isFetching} // Show loading state
             >
               {isLoading || isFetching ? "Updating..." : "Update"}

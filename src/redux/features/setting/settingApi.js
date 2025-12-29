@@ -61,16 +61,6 @@ const settingApi = baseApi.injectEndpoints({
       invalidatesTags: ["Setting"],
     }),
 
-    updateAboutUs: builder.mutation({  // ✅ FIXED: Use mutation instead of query
-      query: (data) => ({
-        url: "/general-info/update/about-us",
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["Setting"],
-    }),
-
-
     getUserProfile: builder.query({
       query: () => ({
         url: "/users/profile",
@@ -122,6 +112,25 @@ const settingApi = baseApi.injectEndpoints({
       invalidatesTags: ["Setting"],
     }),
 
+    getaboutus: builder.query({
+      query: () => ({
+        url: "/settings?type=aboutUs",
+        method: "GET",
+        providesTags: ["Setting"],
+      }),
+    }),
+
+    updateAboutUs: builder.mutation({
+      query: (data) => ({
+        url: "/settings?type=aboutUs",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Setting"],
+    }),
+
+
+
 
 
   }),
@@ -142,15 +151,16 @@ export const {
   useAddFaqMainMutation,
   useDeleteFaqMutation,
 
-  useUpdateAboutUsMutation,
   useGetUserProfileQuery,
   useUpdateProfileMutation,
-
+  
   useGetAllNotificationQuery,
 
   useGetContactUsQuery,
-  useUpdateContactUsMutation
-
+  useUpdateContactUsMutation,
+  
+  useUpdateAboutUsMutation,
+  useGetaboutusQuery
 
 
 } = settingApi;

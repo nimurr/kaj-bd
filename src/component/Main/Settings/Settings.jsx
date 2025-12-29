@@ -46,10 +46,10 @@ const Settings = () => {
       title: "Terms & Conditions",
       path: "terms-conditions",
     },
-    // {
-    //   title: "About us",
-    //   path: "about-us",
-    // },
+    {
+      title: "About us",
+      path: "about-us",
+    },
     {
       title: "Contact Us",
       path: "contact-us",
