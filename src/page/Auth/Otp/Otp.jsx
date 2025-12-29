@@ -19,8 +19,8 @@ const Otp = () => {
   // token form search params
   const searchParams = new URLSearchParams(window.location.search);
   const token = searchParams.get("token");
- 
- 
+
+
   const navigate = useNavigate();
   const [forgotPassword] = useForgotPasswordMutation();
   const [verifyOtp, { isLoading }] = useVerifyEmailMutation();
@@ -28,28 +28,9 @@ const Otp = () => {
     setOtp(otpValue);
   };
   const handleMatchOtp = async () => {
-    console.log(otp,
-      email,
-      token,)
-    try {
-      const res = await verifyOtp({
-        otp,
-        email,
-        token,
-      }).unwrap();
-      console.log(res);
-      if (res.error) {
-        toast.error(res?.error?.data?.message);
-      }
-      if (res) {
-        localStorage.setItem("jwtToken", res?.changePasswordToken);
-        toast.success(res?.message);
-        navigate(`/auth/new-password/${email}?otp=${otp}`);
-      }
-    } catch (error) {
-      console.log(error)
-      toast.error(error?.data?.message || "Something went wrong");
-    }
+
+    navigate(`/auth/new-password/${email}?otp=${otp}`);
+
   };
 
   const handleResendPassword = async () => {

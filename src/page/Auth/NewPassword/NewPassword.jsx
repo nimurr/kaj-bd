@@ -45,6 +45,8 @@ const NewPassword = () => {
       password
     }
 
+    console.log(data)
+
 
     try {
       const res = await resetPassword(data);
