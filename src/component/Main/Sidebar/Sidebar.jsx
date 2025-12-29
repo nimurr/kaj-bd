@@ -316,7 +316,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   return (
     <>
       {/* ===== DESKTOP SIDEBAR ===== */}
-      <div className="hidden md:block w-[280px] h-full bg-[#778beb] fixed shadow-2xl overflow-y-auto">
+      <div className="hidden md:block w-[280px] min-h-screen h-full bg-[#778beb] fixed shadow-2xl overflow-y-auto">
         <Link to="/" className="flex justify-center pt-5 mb-5">
           <img src={logo} alt="logo" className="w-[100px] rounded shadow" />
         </Link>
@@ -327,8 +327,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `w-[80%] mx-auto px-5 py-2 flex items-center gap-3 text-white ${
-                  isActive ? "bg-white !text-[#778beb] rounded-xl" : ""
+                `w-[80%] mx-auto px-5 py-2 flex items-center gap-3 text-white ${isActive ? "bg-white !text-[#778beb] rounded-xl" : ""
                 }`
               }
             >
@@ -340,7 +339,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-10 py-4 mt-5 text-white"
+          className="flex items-center gap-2 px-10 ml-2 py-4 mt-5 text-white"
         >
           <IoIosLogOut className="size-8" />
           Logout
@@ -349,9 +348,8 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
       {/* ===== MOBILE SIDEBAR ===== */}
       <div
-        className={`fixed top-0 left-0 z-40 w-64 h-full bg-[#778beb] transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 md:hidden`}
+        className={`fixed top-0 left-0 z-40 w-64 h-full overflow-y-auto bg-[#778beb] transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 md:hidden`}
       >
         <div
           onClick={toggleSidebar}
@@ -371,8 +369,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
               to={item.path}
               onClick={toggleSidebar}
               className={({ isActive }) =>
-                `w-[70%] mx-auto px-5 py-2 flex items-center gap-3 text-white ${
-                  isActive ? "bg-white !text-[#778beb] rounded-xl" : ""
+                `w-[70%] mx-auto px-5 py-2 flex items-center gap-3 text-white ${isActive ? "bg-white !text-[#778beb] rounded-xl" : ""
                 }`
               }
             >
@@ -387,7 +384,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             setShowModal(true);
             toggleSidebar();
           }}
-          className="flex items-center gap-2 px-8 mt-6 text-white"
+          className="flex items-center gap-2 ml-5 px-8 mt-6 pb-3 text-white"
         >
           <IoIosLogOut className="size-7" />
           Logout

@@ -24,6 +24,10 @@ const ContactUs = () => {
             email,
             detailsOverview
         }
+        if (!number || !email || !detailsOverview) {
+            message.error("Please fill all the fields");
+            return;
+        }
 
         try {
 
@@ -72,15 +76,15 @@ const ContactUs = () => {
                 <form onSubmit={handleSubmit} className='bg-gray-100 p-5 rounded-lg'>
                     <div>
                         <span className='font-semibold text-xl mb-2 block'>Eamil</span>
-                        <input className='p-2 rounded-lg w-full ' placeholder='Enter Your Contact Email' type="text" name="email" id="" />
+                        <input defaultValue={fullData?.email} required className='p-2 rounded-lg w-full outline-none focus:outline-[#778beb]' placeholder='Enter Your Contact Email' type="text" name="email" id="" />
                     </div>
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Phone Number</span>
-                        <input className='p-2 rounded-lg w-full ' placeholder='Enter Your Contact Number' type="number" name="number" id="" />
+                        <input defaultValue={fullData?.phoneNumber} required className='p-2 rounded-lg w-full focus:outline-[#778beb]' placeholder='Enter Your Contact Number' type="number" name="number" id="" />
                     </div>
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Details Overview</span>
-                        <textarea rows={4} name="detailsOverview" className='w-full p-2 rounded-lg' placeholder='Enter Your Details' id=""></textarea>
+                        <textarea defaultValue={fullData?.detailsOverview} required rows={4} name="detailsOverview" className='w-full p-2 rounded-lg focus:outline-[#778beb]' placeholder='Enter Your Details' id=""></textarea>
                     </div>
                     <div className='mt-5'>
                         <button className='py-2 px-8 rounded-lg bg-[#778beb] text-white'>Update</button>
