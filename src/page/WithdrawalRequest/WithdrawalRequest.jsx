@@ -46,6 +46,9 @@ const WithdrawalRequest = () => {
     const withdrawals = data?.data?.attributes?.results || [];
     const pagination = data?.data?.attributes;
 
+
+    console.log(withdrawals)
+
     // ================= MUTATION =================
     const [approveReject] = useApproveAndRejectMutation();
 
@@ -119,10 +122,22 @@ const WithdrawalRequest = () => {
         {
             title: "Bank Name",
             dataIndex: "bankName",
+            render: (m) => <span className="capitalize"> {m || "------"} </span>,
         },
         {
             title: "A/C Number",
             dataIndex: "bankAccountNumber",
+            render: (m) => <span className="capitalize"> {m || "------"} </span>,
+        },
+        {
+            title: "Payment Type",
+            dataIndex: "type",
+            render: (m) => <span className="capitalize"> {m || "------"} </span>,
+        },
+        {
+            title: "Mobile Banking Number",
+            dataIndex: "mobileNo",
+            render: (m) => <span className="capitalize"> {m || "------"} </span>,
         },
         {
             title: "Withdraw Amount",
@@ -140,10 +155,10 @@ const WithdrawalRequest = () => {
             render: (s) => (
                 <span
                     className={`capitalize ${s === "rejected"
-                            ? "text-red-500"
-                            : s === "completed"
-                                ? "text-green-600"
-                                : "text-yellow-600"
+                        ? "text-red-500"
+                        : s === "completed"
+                            ? "text-green-600"
+                            : "text-yellow-600"
                         }`}
                 >
                     {s}
@@ -174,13 +189,13 @@ const WithdrawalRequest = () => {
                 {/* FILTERS */}
                 <Form className="flex gap-3 flex-wrap">
                     {/* <Input
-            placeholder="Search"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-              setPage(1);
-            }}
-          /> */}
+                        placeholder="Search"
+                        value={searchText}
+                        onChange={(e) => {
+                        setSearchText(e.target.value);
+                        setPage(1);
+                        }}
+                    /> */}
 
                     <select
                         className="py-1 px-4 rounded border"
@@ -246,7 +261,7 @@ const WithdrawalRequest = () => {
                 width={700}
             >
                 {modalData && (
-                    <div className="space-y-3">
+                    <div className="space-y-3 capitalize">
                         <p className="flex items-center justify-between">
                             <strong>Name:</strong> {modalData?.userId?.name}
                         </p>
@@ -254,15 +269,30 @@ const WithdrawalRequest = () => {
                             <strong>Email:</strong> {modalData?.userId?.email}
                         </p>
                         <p className="flex items-center justify-between">
-                            <strong>Bank:</strong> {modalData?.bankName}
+                            <strong>Bank:</strong> {modalData?.bankName || "------"}
                         </p>
                         <p className="flex items-center justify-between">
                             <strong>Account:</strong>{" "}
-                            {modalData?.bankAccountNumber}
+                            {modalData?.bankAccountNumber || "------"}
                         </p>
-                       <p className="flex items-center justify-between">
+                        <p className="flex items-center justify-between">
                             <strong>Amount:</strong> ৳
-                            {modalData?.requestedAmount}
+                            {modalData?.requestedAmount || "------"}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Payment Type:</strong> {modalData?.type || "------"}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Mobile Banking Type:</strong>{" "}
+                            {modalData?.accountType || "------"}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Mobile Banking Number:</strong>{" "}
+                            {modalData?.mobileNo || "------"}
+                        </p>
+                        <p className="flex items-center justify-between">
+                            <strong>Request Date:</strong>{" "}
+                            {moment(modalData?.requestedAt).format("DD MMM YYYY")}
                         </p>
 
                         {modalData?.proofOfPayment?.[0] && (

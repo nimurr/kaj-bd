@@ -13,10 +13,15 @@ import logoimage from '/public/logo/main_logo.png';
 const NewPassword = () => {
   const navigate = useNavigate();
   const { email } = useParams();
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
-  const jwtToken = localStorage.getItem("jwtToken");
+  // get otp from search params
+  const searchParams = new URLSearchParams(window.location.search);
+  const otp = searchParams.get("otp");
 
-  console.log(jwtToken);
+  console.log(otp)
+
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+
+
 
   const submit = async (values) => {
     const { password, confirmPassword } = values;
@@ -32,12 +37,17 @@ const NewPassword = () => {
       return;
     }
 
+  
+
+    const data = {
+      email,
+      otp,
+      password
+    }
+
 
     try {
-      const res = await resetPassword({
-        jwtToken,
-        newPassword: password
-      });
+      const res = await resetPassword(data);
       console.log(res);
       if (res.error) {
         toast.error(res.error.data.message);

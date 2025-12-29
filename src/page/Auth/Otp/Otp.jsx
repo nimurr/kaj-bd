@@ -20,9 +20,7 @@ const Otp = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const token = searchParams.get("token");
  
-
-  console.log(token)
-
+ 
   const navigate = useNavigate();
   const [forgotPassword] = useForgotPasswordMutation();
   const [verifyOtp, { isLoading }] = useVerifyEmailMutation();
@@ -46,7 +44,7 @@ const Otp = () => {
       if (res) {
         localStorage.setItem("jwtToken", res?.changePasswordToken);
         toast.success(res?.message);
-        navigate(`/auth/new-password/${email}`);
+        navigate(`/auth/new-password/${email}?otp=${otp}`);
       }
     } catch (error) {
       console.log(error)
