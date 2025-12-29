@@ -16,9 +16,9 @@ const AllServices = () => {
     });
 
     const fullServicesData = data?.data?.attributes?.results || [];
-    const totalCount = data?.data?.attributes?.totalCount || 0; // Total number of services
+    const totalCount = data?.data?.attributes?.totalResults || 0; // Total number of services
 
-    console.log(fullServicesData)
+    console.log(totalCount)
 
     const [services, setServices] = useState(fullServicesData);
 
@@ -175,7 +175,7 @@ const AllServices = () => {
             <div className='flex justify-end'>
                 <Pagination
                     current={currentPage}
-                    total={totalServices}
+                    total={totalCount}
                     pageSize={pageSize}
                     onChange={onPageChange}
                     showSizeChanger={false}
