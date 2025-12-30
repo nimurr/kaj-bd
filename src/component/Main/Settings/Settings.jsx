@@ -115,7 +115,7 @@ const Settings = () => {
       {settingsItem?.map((setting, index) => {
         // Hide Privacy Policy & Contact Us for non-admins
         if (
-          (setting.title === "Privacy Policy" ||
+          (setting.title === "Privacy Policy" || setting.title === "Terms & Conditions" ||
             setting.title === "Contact Us") &&
           user.role !== "admin"
         ) {

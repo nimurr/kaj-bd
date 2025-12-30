@@ -80,7 +80,7 @@ const ContactUs = () => {
                     </div>
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Phone Number</span>
-                        <input defaultValue={fullData?.phoneNumber} required className='p-2 rounded-lg w-full focus:outline-[#778beb]' placeholder='Enter Your Contact Number' type="number" name="number" id="" />
+                        <input defaultValue={fullData?.phoneNumber} required className='p-2 rounded-lg w-full focus:outline-[#778beb]' placeholder='Enter Your Contact Number' type="text" name="number" id="" />
                     </div>
                     <div className='mt-2'>
                         <span className='font-semibold text-xl mb-2 block'>Details Overview</span>

@@ -102,7 +102,7 @@ const PersonalinfoEdit = () => {
                             </div>
 
                             <div className="text-center mt-6">
-                                <p className="text-lg">Admin</p>
+                                <p className="text-lg md:text-xl">{user?.role || "Admin"}</p>
                                 <h1 className="text-2xl font-medium">{user?.name || "N/A"}</h1>
                             </div>
                         </div>

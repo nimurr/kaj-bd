@@ -275,7 +275,6 @@ const sidebarItems = [
     path: "/withdrawal-request",
     name: "Withdrawal Request",
     icon: <FaBangladeshiTakaSign className="size-6" />,
-    access: "admin",
   },
   {
     path: "/settings",
