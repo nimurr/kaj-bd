@@ -63,8 +63,6 @@ const Status = ({ fullData, isLoading }) => {
               </div>
             </div>
 
-
-
             <div className="flex justify-between items-start p-5 rounded-lg border-2 border-gray-200">
               <div className="size-20 p-3 flex justify-center items-center rounded-full bg-[#778beb] text-white  ">
                 <FaUserCircle className="size-10" />

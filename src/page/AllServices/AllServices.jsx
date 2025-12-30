@@ -57,11 +57,12 @@ const AllServices = () => {
     // Handle Add Service
     const handleAddService = async (event) => {
         event.preventDefault();
+        const form = event.target;
         const serviceName = event.target.serviceName.value;
         const image = event.target.image.files[0];
 
 
-        if (serviceName && image) {
+        if (serviceName) {
             const formData = new FormData();
             formData.append("attachments", image);
             formData.append("name", serviceName);
@@ -71,6 +72,7 @@ const AllServices = () => {
                 if (response?.data) {
                     setServices([...services, response.data]); // Update services state
                     closeAddModal();
+                    form.reset();
                     message.success('Service added successfully!');
                 }
             } catch (error) {
