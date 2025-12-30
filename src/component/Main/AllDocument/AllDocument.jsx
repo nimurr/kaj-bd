@@ -199,191 +199,195 @@ import { MdOutlineDeleteForever } from 'react-icons/md';
 import { message } from 'antd';
 
 import {
-  useAddBannerMutation,
-  useDeleteBannerMutation,
-  useGetBannersQuery
+    useAddBannerMutation,
+    useDeleteBannerMutation,
+    useGetBannersQuery
 } from '../../../redux/features/banners/banners';
 
 import {
-  useCreatePercentageMutation,
-  useGetPercentageQuery
+    useCreatePercentageMutation,
+    useGetPercentageQuery
 } from '../../../redux/features/percentage/percentage';
 
 import Url from '../../../redux/baseApi/forImageUrl';
 
 const AllDocument = () => {
 
-  // ================= BANNERS =================
-  const { data: banner, refetch, isLoading } = useGetBannersQuery();
-  const allBanner = banner?.data?.attributes;
+    // ================= BANNERS =================
+    const { data: banner, refetch, isLoading } = useGetBannersQuery();
+    const allBanner = banner?.data?.attributes;
 
-  const [addBanner] = useAddBannerMutation();
-  const [deleteBanner] = useDeleteBannerMutation();
+    const [addBanner] = useAddBannerMutation();
+    const [deleteBanner] = useDeleteBannerMutation();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
 
-  // 🔴 IMPORTANT: Control AntD Upload
-  const [fileList, setFileList] = useState([]);
+    // 🔴 IMPORTANT: Control AntD Upload
+    const [fileList, setFileList] = useState([]);
 
-  // ================= UPLOAD HANDLER =================
-  const handleUploadImage = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append('attachments', file);
+    // ================= UPLOAD HANDLER =================
+    const handleUploadImage = async (file) => {
+        try {
+            const formData = new FormData();
+            formData.append('attachments', file);
 
-      const res = await addBanner(formData).unwrap();
+            const res = await addBanner(formData).unwrap();
 
-      if (res.code === 200) {
-        message.success("Banner uploaded successfully");
-        setFileList([]); // ✅ CLEAR DRAGGER UI
-        refetch();
-      } else {
-        message.error(res?.message || "Upload failed");
-        setFileList([]);
-      }
-    } catch (error) {
-      console.log(error);
-      message.error("Failed to upload banner");
-      setFileList([]);
-    }
-  };
+            if (res.code === 200) {
+                message.success("Banner uploaded successfully");
+                setFileList([]); // ✅ CLEAR DRAGGER UI
+                refetch();
+            } else {
+                message.error(res?.message || "Upload failed");
+                setFileList([]);
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Failed to upload banner");
+            setFileList([]);
+        }
+    };
 
-  // ================= DELETE BANNER =================
-  const handleDeleteBannerItem = async (bannerItem) => {
-    try {
-      const res = await deleteBanner({ id: bannerItem._BannerId }).unwrap();
-      if (res.code === 200) {
-        message.success("Banner deleted successfully");
-        refetch();
-      } else {
-        message.error(res?.message || "Delete failed");
-      }
-    } catch (error) {
-      console.log(error);
-      message.error("Failed to delete banner");
-    }
-  };
+    // ================= DELETE BANNER =================
+    const handleDeleteBannerItem = async (bannerItem) => {
+        try {
+            const res = await deleteBanner({ id: bannerItem._BannerId }).unwrap();
+            if (res.code === 200) {
+                message.success("Banner deleted successfully");
+                refetch();
+            } else {
+                message.error(res?.message || "Delete failed");
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Failed to delete banner");
+        }
+    };
 
-  // ================= PERCENTAGE =================
-  const { data: percentageData } = useGetPercentageQuery();
-  const existingPercentage =
-    percentageData?.data?.attributes[0]?.percentage || 0;
+    // ================= PERCENTAGE =================
+    const { data: percentageData } = useGetPercentageQuery();
+    const existingPercentage =
+        percentageData?.data?.attributes[0]?.percentage || 0;
 
-  const [percentage, setPercentage] = useState(existingPercentage);
-  const [addPercentage, { isLoading: isLoadingPercentage }] =
-    useCreatePercentageMutation();
+    const [percentage, setPercentage] = useState(existingPercentage);
+    const [addPercentage, { isLoading: isLoadingPercentage }] =
+        useCreatePercentageMutation();
 
-  const handleSubmitPercentage = async () => {
-    try {
-      const res = await addPercentage({ percentage: Number(percentage) }).unwrap();
-      if (res.code === 200) {
-        message.success("Percentage added successfully");
-      }
-    } catch (error) {
-      console.log(error);
-      message.error("Failed to add percentage");
-    }
-  };
+    const handleSubmitPercentage = async () => {
+        try {
+            const res = await addPercentage({ percentage: Number(percentage) }).unwrap();
+            if (res.code === 200) {
+                message.success("Percentage added successfully");
+            }
+        } catch (error) {
+            console.log(error);
+            message.error("Failed to add percentage");
+        }
+    };
 
-  // ================= UI =================
-  return (
-    <div className="my-10 px-5 grid xl:grid-cols-4 items-start gap-10">
+    // ================= UI =================
+    return (
+        <div className="my-10 px-5 grid xl:grid-cols-4 items-start gap-10">
 
-      {/* ================= ADD BANNER ================= */}
-      <section className="space-y-5 xl:col-span-3 p-5 bg-gray-100 rounded-lg">
-        <h2 className="text-3xl font-medium mb-5">Add Banner</h2>
+            {/* ================= ADD BANNER ================= */}
+            <section className="space-y-5 xl:col-span-3 p-5 bg-gray-100 rounded-lg">
+                <h2 className="text-3xl font-medium mb-5">Add Banner</h2>
 
-        <div className="w-full rounded-lg bg-gray-50 p-5">
-          <Dragger
-            fileList={fileList}
-            beforeUpload={(file) => {
-              setFileList([file]); // show temporarily
-              handleUploadImage(file);
-              return false; // prevent auto upload
-            }}
-            onRemove={() => setFileList([])}
-          >
-            <p className="ant-upload-drag-icon flex justify-center">
-              <LuImagePlus className="text-3xl" />
-            </p>
-            <p className="ant-upload-text">
-              Click or drag file to upload
-            </p>
-            <p className="ant-upload-hint">
-              Only image files are supported
-            </p>
-          </Dragger>
+                <div className="w-full rounded-lg bg-gray-50 p-5">
+                    <Dragger
+                        fileList={fileList}
+                        beforeUpload={(file) => {
+                            setFileList([file]); // show temporarily
+                            handleUploadImage(file);
+                            return false; // prevent auto upload
+                        }}
+                        onRemove={() => setFileList([])}
+                    >
+                        <p className="ant-upload-drag-icon flex justify-center">
+                            <LuImagePlus className="text-3xl" />
+                        </p>
+                        <p className="ant-upload-text">
+                            Click or drag file to upload
+                        </p>
+                        <p className="ant-upload-hint">
+                            Only image files are supported
+                        </p>
+                    </Dragger>
+                </div>
+
+                {/* ================= BANNER LIST ================= */}
+                <div className="grid md:grid-cols-2 gap-3 mt-5">
+                    {allBanner?.map((bannerItem, index) => (
+                        <div
+                            key={index}
+                            className="relative bg-white rounded-lg overflow-hidden"
+                        >
+                            <img
+                                src={
+                                    bannerItem?.attachments[0]?.attachment?.includes('amazonaws')
+                                        ? bannerItem?.attachments[0]?.attachment
+                                        : Url + bannerItem?.attachments[0]?.attachment?.url
+                                }
+                                alt="Banner"
+                                className="w-full"
+                            />
+                            <span
+                                onClick={() => handleDeleteBannerItem(bannerItem)}
+                                className="bg-[#778beb] w-10 h-10 cursor-pointer absolute top-2 right-2 rounded-full flex items-center justify-center text-white"
+                            >
+                                <MdOutlineDeleteForever className="text-2xl" />
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* ================= LOADING SKELETON ================= */}
+                {isLoading && (
+                    <div className="grid md:grid-cols-2 gap-3 mt-5">
+                        {[...Array(20)].map((_, index) => (
+                            <div
+                                key={index}>
+                                <div className='className="w-full h-5 bg-gray-200 animate-pulse rounded-lg mt-2'></div>
+                                <div className='className="w-full h-5 bg-gray-200 animate-pulse rounded-lg mt-2'></div>
+                                <div className='className="w-full h-5 bg-gray-200 animate-pulse rounded-lg mt-2'></div>
+                                <div className='className="w-full h-5 bg-gray-200 animate-pulse rounded-lg mt-2'></div>
+                                <div className='className="w-full h-5 bg-gray-200 animate-pulse rounded-lg mt-2'></div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
+
+            {/* ================= PERCENTAGE (ADMIN) ================= */}
+            {user?.role === 'admin' && (
+                <section className="space-y-5 p-5 bg-gray-100 rounded-lg">
+                    <h2 className="text-3xl font-medium">Add Percentage</h2>
+
+                    <p>
+                        Admin Added Total Percentage:{' '}
+                        <span className="text-xl font-semibold text-blue-600">
+                            {existingPercentage}%
+                        </span>
+                    </p>
+
+                    <input
+                        type="number"
+                        value={percentage}
+                        onChange={(e) => setPercentage(e.target.value)}
+                        className="w-full px-5 py-2 border border-[#778beb] rounded-lg"
+                        placeholder="Enter percentage"
+                    />
+
+                    <button
+                        onClick={handleSubmitPercentage}
+                        className="py-2 w-full bg-[#778beb] text-white rounded-lg"
+                    >
+                        Submit {isLoadingPercentage && '...'}
+                    </button>
+                </section>
+            )}
         </div>
-
-        {/* ================= BANNER LIST ================= */}
-        <div className="grid md:grid-cols-2 gap-3 mt-5">
-          {allBanner?.map((bannerItem, index) => (
-            <div
-              key={index}
-              className="relative bg-white rounded-lg overflow-hidden"
-            >
-              <img
-                src={
-                  bannerItem?.attachments[0]?.attachment?.includes('amazonaws')
-                    ? bannerItem?.attachments[0]?.attachment
-                    : Url + bannerItem?.attachments[0]?.attachment?.url
-                }
-                alt="Banner"
-                className="w-full"
-              />
-              <span
-                onClick={() => handleDeleteBannerItem(bannerItem)}
-                className="bg-[#778beb] w-10 h-10 cursor-pointer absolute top-2 right-2 rounded-full flex items-center justify-center text-white"
-              >
-                <MdOutlineDeleteForever className="text-2xl" />
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* ================= LOADING SKELETON ================= */}
-        {isLoading && (
-          <div className="grid md:grid-cols-2 gap-3 mt-5">
-            {[...Array(20)].map((_, index) => (
-              <div
-                key={index}
-                className="w-full h-40 bg-gray-200 animate-pulse rounded-lg"
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* ================= PERCENTAGE (ADMIN) ================= */}
-      {user?.role === 'admin' && (
-        <section className="space-y-5 p-5 bg-gray-100 rounded-lg">
-          <h2 className="text-3xl font-medium">Add Percentage</h2>
-
-          <p>
-            Admin Added Total Percentage:{' '}
-            <span className="text-xl font-semibold text-blue-600">
-              {existingPercentage}%
-            </span>
-          </p>
-
-          <input
-            type="number"
-            value={percentage}
-            onChange={(e) => setPercentage(e.target.value)}
-            className="w-full px-5 py-2 border border-[#778beb] rounded-lg"
-            placeholder="Enter percentage"
-          />
-
-          <button
-            onClick={handleSubmitPercentage}
-            className="py-2 w-full bg-[#778beb] text-white rounded-lg"
-          >
-            Submit {isLoadingPercentage && '...'}
-          </button>
-        </section>
-      )}
-    </div>
-  );
+    );
 };
 
 export default AllDocument;

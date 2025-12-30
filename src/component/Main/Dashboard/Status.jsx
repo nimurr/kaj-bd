@@ -72,7 +72,7 @@ const Status = ({ fullData, isLoading }) => {
               <div className="space-y-2">
                 <h1 className="text-2xl text-right text-gray-700 font-semibold">Total Provider</h1>
                 <h1 className="text-right text-5xl font-semibold text-[#222222]">
-                  {fullData?.currentAndLastMonthProviderCount?.allCount}
+                  {fullData?.statistics?.totalProviders}
                 </h1>
                 <h1 className="text-gray-500 text-right space-x-2">
                   <div className="flex items-center justify-end">
