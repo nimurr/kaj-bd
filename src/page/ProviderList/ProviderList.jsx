@@ -256,17 +256,19 @@ const ProviderList = () => {
                   </div>
                 ))}
               </div>
-              <div>
-                <h2 className="text-xl font-semibold mt-4 mb-2">Face Image from Front Camera</h2>
-                <Image className="w-full" src={userDataFull?.faceImageFromFrontCam[0]} alt="" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold mt-4 mb-2">NID Front Side Image</h2>
-                <Image className="w-full" src={userDataFull?.frontSideCertificateImage[0]} alt="" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold mt-4 mb-2">NID Back Side Image</h2>
-                <Image className="w-full" src={userDataFull?.backSideCertificateImage[0]} alt="" />
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 mt-2 items-start gap-5 ">
+                <div className="border p-2 rounded-xl">
+                  <h2 className="text-xl font-semibold mb-2">Face Image</h2>
+                  <Image className="w-full " src={userDataFull?.faceImageFromFrontCam[0]} alt="" />
+                </div>
+                <div className="border p-2 rounded-xl">
+                  <h2 className="text-xl font-semibold mb-2">NID Front</h2>
+                  <Image className="w-full" src={userDataFull?.frontSideCertificateImage[0]} alt="" />
+                </div>
+                <div className="border p-2 rounded-xl">
+                  <h2 className="text-xl font-semibold mb-2">NID Back</h2>
+                  <Image className="w-full" src={userDataFull?.backSideCertificateImage[0]} alt="" />
+                </div>
               </div>
             </div>
           </div>
