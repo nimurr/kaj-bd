@@ -289,6 +289,7 @@ const ProviderListNewProviderRequest = () => {
                   <Image className="w-full" src={userDataFull?.backSideCertificateImage[0]} alt="" />
                 </div>
               </div>
+              
             </div>
           </div>
         )}
