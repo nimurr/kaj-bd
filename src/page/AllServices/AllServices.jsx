@@ -38,6 +38,7 @@ const AllServices = () => {
 
     const openAddModal = () => {
         setIsAddModalOpen(true);
+
     };
 
     const openEditModal = (service) => {
@@ -69,6 +70,7 @@ const AllServices = () => {
 
             try {
                 const response = await createService(formData).unwrap(); // Call API to add service
+                console.log(response)
                 if (response?.data) {
                     setServices([...services, response.data]); // Update services state
                     closeAddModal();
@@ -76,6 +78,7 @@ const AllServices = () => {
                     message.success('Service added successfully!');
                 }
             } catch (error) {
+                console.log(error)
                 message.error('Failed to add service.');
             }
         } else {
@@ -195,7 +198,7 @@ const AllServices = () => {
                 <form onSubmit={handleAddService}>
                     <div>
                         <label>Service Name</label>
-                        <Input name="serviceName" placeholder="Enter the service name" className="block mt-2 py-2" />
+                        <input type="text" name="serviceName" placeholder="Enter the service name" className="block mt-2 p-2 border w-full rounded-lg" />
                     </div>
 
                     <div className="mt-4">
