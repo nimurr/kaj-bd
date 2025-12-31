@@ -81,6 +81,7 @@ const RejectedProviderListNewProviderRequest = () => {
         { title: "Email", dataIndex: "email" },
         { title: "Gender", dataIndex: "gender" },
         { title: "Role", dataIndex: "role" },
+        { title: "phoneNumber", dataIndex: "phoneNumber" },
         {
             title: "Joined Date",
             dataIndex: "createdAt",
