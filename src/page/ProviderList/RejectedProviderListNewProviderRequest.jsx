@@ -228,7 +228,7 @@ const RejectedProviderListNewProviderRequest = () => {
                                     ["Name", userDataFull?.name],
                                     ["Email", userDataFull?.email],
                                     ["Role", userDataFull?.role],
-                                    ["Phone", userDataFull?.phoneNumber || "N/A" ],
+                                    ["Phone", userDataFull?.phoneNumber || "N/A"],
                                     ["Gender", userDataFull?.gender],
                                     [
                                         "Created Date",
