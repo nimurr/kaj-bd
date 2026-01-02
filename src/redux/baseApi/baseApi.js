@@ -4,7 +4,7 @@ export const baseApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({
     // baseUrl: "https://api.budbox.fun/api/v1",
-    baseUrl: "https://apikaajbbd.sobhoy.com/api/v1",
+    baseUrl: "https://newsheakh6737.sobhoy.com/api/v1",
     prepareHeaders: (headers, { getState }) => {
       // Retrieve the token from your store or local storage
       const token = localStorage.getItem("token");
@@ -16,6 +16,6 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Categories", "ComboBox", "Products", "BuildBox", 'User-2', "Subscription", "Setting", 'Privacy-Policy', "Profile", "Document", "Banners", "Services", "Withdrawal", "Percentage", "Admins", "UserSupport"],
+  tagTypes: ["User", "Categories", "ComboBox", "Products", "BuildBox", 'User-2', "Subscription", "Setting", 'Privacy-Policy', "Profile", "Document", "Banners" , "Services" , "Withdrawal" , "Percentage" , "Admins" , "UserSupport"],
   endpoints: () => ({}),
 });
