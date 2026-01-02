@@ -371,9 +371,8 @@ const AllDocument = () => {
                     </p>
 
                     <input
-                        type="number"
-                        defaultValue={existingPercentage}
-                        // value={percentage}
+                        type="number" 
+                        value={existingPercentage}
                         onChange={(e) => setPercentage(e.target.value)}
                         className="w-full px-5 py-2 border border-[#778beb] rounded-lg"
                         placeholder="Enter percentage"
