@@ -24,6 +24,7 @@ const Header = ({ toggleSidebar }) => {
   }, [refetch]);
 
 
+
   return (
     <div className="w-full px-5 py-3.5 bg-[#778beb] flex justify-between items-center text-white sticky top-0 left-0 z-10">
       <div className="flex items-center gap-3">
@@ -40,7 +41,7 @@ const Header = ({ toggleSidebar }) => {
         <Link to={"/notification"}>
           <h1 className="relative text-[#778beb] p-2 rounded-full bg-white">
             <MdNotificationsNone className="size-8" />{" "}
-            {/* <span className="absolute top-0 right-0 w-5 h-5 text-white text-xs flex justify-center items-center bg-red-500 rounded-full">99+</span> */}
+            <span className="absolute top-1 right-1 w-3 h-3 text-white text-xs flex justify-center items-center bg-red-500 rounded-full"></span>
           </h1>
 
         </Link>

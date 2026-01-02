@@ -304,6 +304,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     dispatch(logoutUser());
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("isNotification");
     navigate("/auth");
   };
 

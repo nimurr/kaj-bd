@@ -25,7 +25,7 @@ const SignIn = () => {
       const res = await login(data).unwrap();
       console.log(res?.data?.attributes?.userWithoutPassword);
 
-      
+
       if (res.error) {
         toast.error(res.error.data.message || "Something went wrong");
         console.log(res.error.data.message);
@@ -33,6 +33,7 @@ const SignIn = () => {
       if (res) {
         localStorage.setItem("token", res?.data?.attributes?.tokens?.accessToken);
         localStorage.setItem("user", JSON.stringify(res?.data?.attributes?.userWithoutPassword));
+        localStorage.setItem("isNotification", JSON.stringify({ isNotification: false }));
         dispatch(
           loggedUser({
             token: res?.token
