@@ -50,10 +50,12 @@ const Header = ({ toggleSidebar }) => {
     // ✅ LISTENER
     const handleAdminNotification = (payload) => {
       console.log("🔔 Admin Notification:", payload);
-      if (payload) {
-        refetch();
-        localStorage.setItem("isNotification", JSON.stringify({ isNotification: true }));
-      }
+
+      localStorage.setItem("isNotification", JSON.stringify({ isNotification: true }));
+
+      setIsNotification({ isNotification: true });
+
+      refetch();
       // you can update state / redux here
     };
 
