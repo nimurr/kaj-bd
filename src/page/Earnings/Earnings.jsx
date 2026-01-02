@@ -159,7 +159,7 @@ const Earnings = () => {
               <hr />
             </div>
 
-            <div className='border border-lime-600  text-lime-500 p-3 rounded-xl'>
+            {/* <div className='border border-lime-600  text-lime-500 p-3 rounded-xl'>
               <div className='flex items-center justify-between'>
                 <h2 className='text-2xl text-gray-600 font-semibold'>Total Transactions </h2>
                 <h2 className='text-3xl text-gray-600 font-semibold '>  </h2>
@@ -168,7 +168,7 @@ const Earnings = () => {
                 <h1 className='text-right text-5xl '>৳{fullData?.totalTransactions}</h1>
               </div>
               <hr />
-            </div>
+            </div> */}
 
 
           </div>
