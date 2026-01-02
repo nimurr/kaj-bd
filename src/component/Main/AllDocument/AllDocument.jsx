@@ -192,7 +192,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dragger from 'antd/es/upload/Dragger';
 import { LuImagePlus } from 'react-icons/lu';
 import { MdOutlineDeleteForever } from 'react-icons/md';
@@ -272,6 +272,10 @@ const AllDocument = () => {
     const [percentage, setPercentage] = useState(existingPercentage);
     const [addPercentage, { isLoading: isLoadingPercentage }] =
         useCreatePercentageMutation();
+
+    useEffect(() => {
+        setPercentage(existingPercentage);
+    }, [existingPercentage]);
 
     const handleSubmitPercentage = async () => {
         try {
@@ -371,8 +375,8 @@ const AllDocument = () => {
                     </p>
 
                     <input
-                        type="number" 
-                        value={existingPercentage}
+                        type="number"
+                        value={percentage}
                         onChange={(e) => setPercentage(e.target.value)}
                         className="w-full px-5 py-2 border border-[#778beb] rounded-lg"
                         placeholder="Enter percentage"
