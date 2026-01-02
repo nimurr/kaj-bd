@@ -47,7 +47,7 @@ const Notification = () => {
         {allNotification?.map((item) => (
           <div key={item.id} className="border border-[#a5b2f5] hover:bg-[#778beb56] cursor-pointer rounded-md p-2 flex items-center space-x-4">
             <div className="text-[#a5b2f5] border border-[#a5b2f5] rounded-full p-2">
-              <span className=" bg-[#a5b2f5] p-1.5 rounded-full absolute ml-4 z-20"></span>
+              <span className=" bg-[#a5b2f5] p-1.5 rounded-full absolute z-0 ml-4"></span>
               <IoMdNotificationsOutline size={30} className="relative" />
             </div>
             <div>
