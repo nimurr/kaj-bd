@@ -1,4 +1,4 @@
 
-const socketUrl = 'sheakh6738.sobhoy.com';
+const socketUrl = 'https://wskaajbd.sobhoy.com';
 
 export default socketUrl;
